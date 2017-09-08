@@ -18,8 +18,8 @@ public class Gameover : MonoBehaviour {
 	void Update () {
 		
 	}
-	public void OnStartButtonClicked1(){
-		FadeManager.Instance.LoadScene( "title", 1.5f );
+	public void OnStartButtonClicked1( ){
+		FadeManager.Instance.LoadScene( "main", 1.5f );
 	}
 
 	public void OnStartButtonClicked2( ){

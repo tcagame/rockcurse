@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
 		shift = new Vector3( 0, 1.5f, 0 );
 	}
 
-	void Update () {
+	void Update ( ) {
 		if ( player != null ) {
 			Vector3 targetCamPos = player.position + offset + shift;
 			transform.position = Vector3.Lerp (transform.position, targetCamPos, smoothing * Time.deltaTime);

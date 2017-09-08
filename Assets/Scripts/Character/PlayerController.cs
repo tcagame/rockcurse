@@ -12,25 +12,27 @@ public class PlayerController : MonoBehaviour {
 	const float DEATH_FALLSPD = -9.5f;
 	const float MAX_VEL_X = 3.0f;
 	const int GENROCK_COUNT = 3;
-	const float flap = 330.0f;
+	const float flap = 250.0f;
 
 	bool jump;
 	bool attach;
 	bool fall_death;
 	bool operate_range;
+	bool generate;
 	float axis;
 	float axis_x;
 
-	Vector3 push_pos;
+	Vector3 PUSH_POS;
 
 	void Awake( ) {
-		rb2d = GetComponent< Rigidbody2D >();
-		anim = GetComponent< Animator >();
+		rb2d = GetComponent< Rigidbody2D >( );
+		anim = GetComponent< Animator >( );
 	}
 
 	void Start ( ) {
 		jump = true;
 		operate_range = false;
+		generate = false;
 		axis = 0;
 		axis_x = 0;
 	}
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour {
 			transform.LookAt( transform.position + Vector3.back );
 		}
 
-		if ( axis_x < 0) {
+		if ( axis_x < 0 ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 		}
@@ -73,7 +75,7 @@ public class PlayerController : MonoBehaviour {
 			jump = true;
 		}
 
-		generateRock();
+		generateRock( );
 		movingRock( );
 	}
 
@@ -86,10 +88,11 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩生成
 	void generateRock( ) {
-		GameObject[] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
+		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
 
 		if ( Input.GetButtonDown("X") ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
+				generate = true;
 				GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 				Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
 			}
@@ -107,7 +110,7 @@ public class PlayerController : MonoBehaviour {
 	void dead( ) {
 		Destroy( gameObject );
 
-		SceneManager.LoadScene("GameOver");
+		FadeManager.Instance.LoadScene( "GameOver", 1.0f );
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
@@ -139,5 +142,9 @@ public class PlayerController : MonoBehaviour {
 			walk_speed *= -1;
 		}
 		anim.SetFloat( "WalkSpeed", walk_speed );
+
+		if ( generate ) {
+			anim.SetBool( "Generate", generate );
+		}
 	}
 }
