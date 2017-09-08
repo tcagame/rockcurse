@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
 	Animator anim;
 
 	const float SPEED = 5.0f;
-	const float DEATH_FALLSPD = -9.5f;
+	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.0f;
 	const int GENROCK_COUNT = 3;
 	const float flap = 250.0f;
