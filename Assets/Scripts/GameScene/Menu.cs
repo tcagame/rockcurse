@@ -5,7 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
-	private static GameObject NoData;
+    public GameObject nodata_window;
+    public GameObject parentObject;
+    GameObject obj;
+    GameObject prefab;
 	public bool LoadGames;
 
 	Button game_main;
@@ -32,8 +35,11 @@ public class Menu : MonoBehaviour {
 	public void OnStartButtonClicked2(){
 		if (!LoadGames) {
 			Debug.Log ("file not found");
-			//NoData.SetActive(true);
-			FadeManager.Instance.LoadScene( "main", 3.0f );
+            obj = (GameObject)Resources.Load("Prefab/NoData");
+            prefab = (GameObject)Instantiate(obj);
+            prefab.transform.SetParent(parentObject.transform, false);
+            Destroy(prefab, 2.0f);
+			//FadeManager.Instance.LoadScene( "main", 3.0f );
 		} else {
 			FadeManager.Instance.LoadScene( "continue", 1.5f );
 		}
