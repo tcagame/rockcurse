@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour {
 	const float SPEED = 5.0f;
 	const float DEATH_FALLSPD = -9.5f;
 	const float MAX_VEL_X = 3.0f;
-	const int GENROCK_COUNT = 2;
+	const int GENROCK_COUNT = 3;
 	const float flap = 330.0f;
 
 	bool jump;
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour {
 		if ( Input.GetButtonDown("Fire3") ) {
 			if ( rock_num.Length < GENROCK_COUNT  ) {
 				GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
-				Instantiate (rock, transform.position + transform.right * -4.0f, Quaternion.identity);
+				Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
 			}
 		}
 	}
