@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void titleUpdate( ) {
-
+		
 	}
 
 	void mainUpdate( ) {

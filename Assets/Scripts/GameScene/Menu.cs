@@ -18,9 +18,9 @@ public class Menu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//sel = GetComponent<Selectable> ();
-		game_main = GameObject.Find ("start").GetComponent<Button> ();
+		game_main = GameObject.Find ("start").GetComponent< Button > ( );
 
-		game_main.Select (); 
+		game_main.Select( ); 
 	}
 	
 	// Update is called once per frame
