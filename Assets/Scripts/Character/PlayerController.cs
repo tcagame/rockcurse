@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour {
 
 		ActionUpdate( );
 		getFallSpeed( );
-		AnimatorUpdate( );
+		//AnimatorUpdate( );
 	}
 
 	void FixedUpdate( ) {
@@ -103,6 +103,9 @@ public class PlayerController : MonoBehaviour {
 		float fall_vel = rb2d.velocity.y;
 
 		if ( fall_vel < DEATH_FALLSPD ) {
+			if ( transform.position.y < -12.0f ) {
+				dead( );
+			}
 			fall_death = true;
 		}
 	}
