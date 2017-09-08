@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class Pauser : MonoBehaviour {
 
 	GameObject canvas;
 
-	bool _pause;
+	public bool _pause;
 
 	// Use this for initialization
 	void Start ( ) {
@@ -17,29 +17,10 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update ( ) {
-		distinction( );
+		Pausing( );
 	}
 
-	void distinction( ) {
-		if ( Application.loadedLevelName == "title" ) {
-			titleUpdate( );
-		}
-		if ( Application.loadedLevelName == "main" ) {
-			mainUpdate( );
-		}
-		if ( Application.loadedLevelName == "set" ) {
-			setUpdate( );
-		}
-		if ( Application.loadedLevelName == "GameOver" ) {
-			gameoverUpdate( );
-		}
-	}
-
-	void titleUpdate( ) {
-
-	}
-
-	void mainUpdate( ) {
+	void Pausing( ) {
 		if ( Input.GetButtonDown("Start") ) {
 			if ( _pause ){
 				_pause = false;
@@ -50,13 +31,5 @@ public class GameManager : MonoBehaviour {
 			}
 			canvas.gameObject.SetActive( _pause );
 		}
-	}
-
-	void setUpdate( ) {
-
-	}
-
-	void gameoverUpdate( ) {
-
 	}
 }

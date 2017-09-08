@@ -50,9 +50,9 @@
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
      <Compile Include="Assets\Scripts\GameScene\CameraController.cs" />
      <Compile Include="Assets\Scripts\GameScene\FadeManager.cs" />
-     <Compile Include="Assets\Scripts\GameScene\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameScene\Gameover.cs" />
      <Compile Include="Assets\Scripts\GameScene\Menu.cs" />
+     <Compile Include="Assets\Scripts\GameScene\Pauser.cs" />
      <Compile Include="Assets\Scripts\Object\RockControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockLeftsideControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockRightsideControl.cs" />
