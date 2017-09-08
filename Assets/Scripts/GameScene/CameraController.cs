@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour {
 	const float LENGTH = -10.0f;
 	Transform player;
 
-	void Start () {
+	void Start ( ) {
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		offset = transform.position - player.position;
 		shift = new Vector3( 0, 1.5f, 0 );

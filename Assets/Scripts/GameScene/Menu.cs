@@ -25,7 +25,7 @@ public class Menu : MonoBehaviour {
 		
 	}
 
-	public void OnStartButtonClicked1(){
+	public void OnStartButtonClicked1( ){
 		FadeManager.Instance.LoadScene( "main", 3.0f );
 	}
 

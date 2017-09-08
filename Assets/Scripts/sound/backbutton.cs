@@ -14,7 +14,7 @@ public class backbutton : MonoBehaviour {
 		
 	}
 
-	public void SceneLoad(){
+	public void SceneLoad( ){
 		FadeManager.Instance.LoadScene( "title", 1.5f );
 	}
 }
