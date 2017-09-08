@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// ジャンプ
-		if ( Input.GetButtonDown("Fire1") && !jump ) {
+		if ( Input.GetButtonDown("A") && !jump ) {
 			rb2d.AddForce( Vector3.up * flap );
 			jump = true;
 		}
@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩押し引き
 	void movingRock( ) {
-		if ( Input.GetButtonDown("Fire2") && operate_range ) {
+		if ( Input.GetButtonDown("B") && operate_range ) {
 			
 		}
 	}
@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour {
 	void generateRock( ) {
 		GameObject[] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
 
-		if ( Input.GetButtonDown("Fire3") ) {
+		if ( Input.GetButtonDown("X") ) {
 			if ( rock_num.Length < GENROCK_COUNT  ) {
 				GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 				Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
