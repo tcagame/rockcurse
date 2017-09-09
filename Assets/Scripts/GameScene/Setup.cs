@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class Setup : MonoBehaviour {
 	
-	Button Buck_button;
+	Button Back_button;
 	// Use this for initialization
 	void Start () {
-		Buck_button = GameObject.Find ("Buckbutton").GetComponent< Button > ( );
+		Back_button = GameObject.Find ("BackButton").GetComponent< Button > ( );
 
-		Buck_button.Select( ); 
+		Back_button.Select( ); 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ( ) {
 		
 	}
 	public void SceneLoad( ){
