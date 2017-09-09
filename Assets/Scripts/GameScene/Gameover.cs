@@ -19,10 +19,12 @@ public class Gameover : MonoBehaviour {
 		
 	}
 	public void OnStartButtonClicked1( ){
-		FadeManager.Instance.LoadScene( "main", 1.5f );
+		FadeManager.Instance.LoadScene( "map1", 1.5f );
 	}
 
+	/*
 	public void OnStartButtonClicked2( ){
 		UnityEditor.EditorApplication.isPlaying = false;
 	}
+	*/
 }

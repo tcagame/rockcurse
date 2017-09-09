@@ -29,13 +29,13 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ){
-		FadeManager.Instance.LoadScene( "main", 3.0f );
+		FadeManager.Instance.LoadScene( "map1", 3.0f );
 	}
 
 	public void OnStartButtonClicked2(){
 		if (!LoadGames) {
-			Debug.Log ("file not found");
-            obj = (GameObject)Resources.Load("Prefab/NoData");
+			Debug.Log( "file not found" );
+            obj = (GameObject)Resources.Load( "Prefab/NoData" );
             prefab = (GameObject)Instantiate(obj);
             prefab.transform.SetParent(parentObject.transform, false);
             Destroy(prefab, 2.0f);
@@ -49,7 +49,9 @@ public class Menu : MonoBehaviour {
 		FadeManager.Instance.LoadScene( "set", 1.5f );
 	}
 
+	/*
 	public void GameEnd( ){
 		UnityEditor.EditorApplication.isPlaying = false;
 	}
+	*/
 }
