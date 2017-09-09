@@ -6,31 +6,56 @@ public class EnemyController : MonoBehaviour {
 
 	Rigidbody2D rb2d;
 
-	Vector3 move_vec;
 	const float SPEED = 40.0f;
+	const float FLAP = 250.0f;
+
+	Vector3 move_vec;
+
+	bool jump;
+	float height;
+	float target_height;
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
 	}
 
 	void Start ( ) {
+		jump = false;
 		move_vec = Vector3.right;
+		height = gameObject.GetComponent< SpriteRenderer > ().bounds.size.y;
+		target_height = 0;
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ( ) {
 		ActionUpdate( );
 	}
 
 	void ActionUpdate( ) {
 		rb2d.AddForce( move_vec * SPEED );
+		transform.LookAt( transform.position + move_vec );
+
+		if ( jump ) {
+			rb2d.AddForce( Vector2.up * FLAP );
+		}
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
-		if ( other.gameObject.transform.position.y > transform.position.y + 2.8f ) {
-			if (other.gameObject.tag == "Rock") {
-				Destroy (gameObject);
+		target_height = other.gameObject.GetComponent< SpriteRenderer >( ).bounds.size.y;
+
+		if ( height * 0.4f > target_height ) {
+			jump = true;
+		}
+
+		if ( other.gameObject.transform.position.y > transform.position.y + 1.0f ) {
+			if ( other.gameObject.tag == "Rock" ) {
+				Destroy ( gameObject );
 			}
 		}
+
+		if ( other.gameObject.tag == "Floor" || other.gameObject.tag == "Rock" ) {
+			jump = false;
+		}
 	}
+
 }

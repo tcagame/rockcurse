@@ -1,13 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\GameScene\Pauser.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Character\PlayerController.cs">
     <Files>
       <File FileName="Assets\Scripts\sound\backbutton.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\sound\BGM_Volume_Change.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\sound\SE_Volume_Change.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Character\PlayerController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\GameScene\Menu.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GameScene\Pauser.cs" Line="24" Column="32" />
+      <File FileName="Assets\Scripts\GameScene\Pauser.cs" Line="20" Column="14" />
+      <File FileName="Assets\Scripts\Character\PlayerController.cs" Line="45" Column="23" />
+      <File FileName="Assets\Scripts\Character\EnemyController.cs" Line="22" Column="25" />
+      <File FileName="Assets\Scripts\Object\RockLeftsideControl.cs" Line="23" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

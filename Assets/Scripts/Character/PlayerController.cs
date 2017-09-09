@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour {
 	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.0f;
 	const int GENROCK_COUNT = 3;
-	const float flap = 250.0f;
+	const float FLAP = 250.0f;
 
 	bool jump;
 	bool attach;
@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
 
 		// ジャンプ
 		if ( Input.GetButtonDown("A") && !jump ) {
-			rb2d.AddForce( Vector3.up * flap );
+			rb2d.AddForce( Vector3.up * FLAP );
 			jump = true;
 		}
 
@@ -123,6 +123,10 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			jump = false;
+		}
+
+		if ( other.gameObject.tag == "Enemy" ) {
+			dead( );
 		}
 	}
 
