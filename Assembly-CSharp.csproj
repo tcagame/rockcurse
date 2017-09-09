@@ -54,10 +54,12 @@
      <Compile Include="Assets\Scripts\GameScene\Menu.cs" />
      <Compile Include="Assets\Scripts\GameScene\Pauser.cs" />
      <Compile Include="Assets\Scripts\GameScene\Setup.cs" />
+     <Compile Include="Assets\Scripts\Object\CageControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockLeftsideControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockRightsideControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockUpsideControl.cs" />
+     <Compile Include="Assets\Scripts\Object\SwitchControl.cs" />
      <Compile Include="Assets\Scripts\sound\BGM_Volume_Change.cs" />
      <Compile Include="Assets\Scripts\sound\SE_Volume_Change.cs" />
  <Reference Include="UnityEngine.UI">

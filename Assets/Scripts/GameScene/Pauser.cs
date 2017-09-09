@@ -11,7 +11,7 @@ public class Pauser : MonoBehaviour {
 	// Use this for initialization
 	void Start ( ) {
 		_pause = false;
-		canvas = GameObject.Find("Canvas").gameObject;
+		canvas = GameObject.Find("PauseCanvas").gameObject;
 		canvas.gameObject.SetActive( _pause );
 	}
 

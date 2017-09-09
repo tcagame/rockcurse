@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 	void Update ( ) {
 		axis_x = Input.GetAxis("Horizontal");
 
+		getPosition( );
 		ActionUpdate( );
 		getFallSpeed( );
 		//AnimatorUpdate( );
@@ -53,6 +54,12 @@ public class PlayerController : MonoBehaviour {
 			vel =  rb2d.velocity - ( vel.normalized * MAX_VEL_X );
 			vel.y = 0f;
 			rb2d.velocity -= vel;
+		}
+	}
+
+	void getPosition( ) {
+		if ( transform.position.x > 42.5f ) {
+			FadeManager.Instance.LoadScene( "title", 1.0f );
 		}
 	}
 

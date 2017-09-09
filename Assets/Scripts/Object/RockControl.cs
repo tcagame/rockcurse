@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RockControl : MonoBehaviour {
 
-	float time = 5.0f;
+	float time = 8.0f;
 
 	// Use this for initialization
 	void Start () {
