@@ -49,9 +49,7 @@ public class Menu : MonoBehaviour {
 		FadeManager.Instance.LoadScene( "set", 1.5f );
 	}
 
-	/*
 	public void GameEnd( ){
 		UnityEditor.EditorApplication.isPlaying = false;
 	}
-	*/
 }

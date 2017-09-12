@@ -5,26 +5,27 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Gameover : MonoBehaviour {
+	
 	Button continue_game;
+	GameManager gm;
 
 	// Use this for initialization
-	void Start () {
-		continue_game = GameObject.Find ("Continue_1").GetComponent<Button> ();
+	void Start ( ) {
+		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
+		continue_game = GameObject.Find("Continue_1").GetComponent< Button >( );
 
-		continue_game.Select (); 
+		continue_game.Select( );
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ( ) {
 		
 	}
-	public void OnStartButtonClicked1( ){
+	public void OnStartButtonClicked1( ) {
 		FadeManager.Instance.LoadScene( "map1", 1.5f );
 	}
 
-	/*
-	public void OnStartButtonClicked2( ){
-		UnityEditor.EditorApplication.isPlaying = false;
+	public void OnStartButtonClicked2( ) {
+		FadeManager.Instance.LoadScene( "Title", 1.5f );
 	}
-	*/
 }

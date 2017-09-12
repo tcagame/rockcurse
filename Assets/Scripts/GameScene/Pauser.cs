@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Pauser : MonoBehaviour {
 
-	GameObject canvas;
+	GameObject image;
 
 	public bool _pause;
 
 	// Use this for initialization
 	void Start ( ) {
 		_pause = false;
-		canvas = GameObject.Find("PauseCanvas").gameObject;
-		canvas.gameObject.SetActive( _pause );
+		image = GameObject.Find("PauseImage").gameObject;
+		image.gameObject.SetActive( _pause );
 	}
 
 	// Update is called once per frame
@@ -29,7 +29,7 @@ public class Pauser : MonoBehaviour {
 				_pause = true;
 				Time.timeScale = 0;
 			}
-			canvas.gameObject.SetActive( _pause );
+			image.gameObject.SetActive( _pause );
 		}
 	}
 }

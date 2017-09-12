@@ -7,18 +7,20 @@ public class PlayerController : MonoBehaviour {
 
 	Rigidbody2D rb2d;
 	Animator anim;
+	GameManager gm;
 
 	const float SPEED = 5.0f;
 	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.0f;
-	const int GENROCK_COUNT = 3;
+	const int GENROCK_COUNT = 5;
 	const float FLAP = 250.0f;
 
-	bool jump;
-	bool attach;
-	bool fall_death;
-	bool operate_range;
-	bool generate;
+	bool _jump;
+	bool _attach;
+	bool _fall_death;
+	bool _operate_range;
+	bool _generate;
+	bool _dead;
 	float axis;
 	float axis_x;
 
@@ -27,12 +29,13 @@ public class PlayerController : MonoBehaviour {
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
 		anim = GetComponent< Animator >( );
+		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
 	}
 
 	void Start ( ) {
-		jump = true;
-		operate_range = false;
-		generate = false;
+		_jump = true;
+		_operate_range = false;
+		_generate = false;
 		axis = 0;
 		axis_x = 0;
 	}
@@ -40,7 +43,6 @@ public class PlayerController : MonoBehaviour {
 	void Update ( ) {
 		axis_x = Input.GetAxis("Horizontal");
 
-		getPosition( );
 		ActionUpdate( );
 		getFallSpeed( );
 		//AnimatorUpdate( );
@@ -54,12 +56,6 @@ public class PlayerController : MonoBehaviour {
 			vel =  rb2d.velocity - ( vel.normalized * MAX_VEL_X );
 			vel.y = 0f;
 			rb2d.velocity -= vel;
-		}
-	}
-
-	void getPosition( ) {
-		if ( transform.position.x > 42.5f ) {
-			FadeManager.Instance.LoadScene( "title", 1.0f );
 		}
 	}
 
@@ -77,9 +73,9 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// ジャンプ
-		if ( Input.GetButtonDown("A") && !jump ) {
+		if ( Input.GetButtonDown("A") && !_jump ) {
 			rb2d.AddForce( Vector3.up * FLAP );
-			jump = true;
+			_jump = true;
 		}
 
 		generateRock( );
@@ -88,7 +84,7 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩押し引き
 	void movingRock( ) {
-		if ( Input.GetButtonDown("B") && operate_range ) {
+		if ( Input.GetButtonDown("B") && _operate_range ) {
 			
 		}
 	}
@@ -99,7 +95,7 @@ public class PlayerController : MonoBehaviour {
 
 		if ( Input.GetButtonDown("X") ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
-				generate = true;
+				_generate = true;
 				GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 				Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
 			}
@@ -113,23 +109,22 @@ public class PlayerController : MonoBehaviour {
 			if ( transform.position.y < -12.0f ) {
 				dead( );
 			}
-			fall_death = true;
+			_fall_death = true;
 		}
 	}
 
 	void dead( ) {
-		Destroy( gameObject );
-
-		FadeManager.Instance.LoadScene( "GameOver", 1.0f );
+		gm.playerDead( );
+		Destroy( gameObject ); // あとで使う動きと入れ替え
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
 		if ( other.gameObject.tag == "Floor" || other.gameObject.name == "Upside") {
-			if ( fall_death ) {
+			if ( _fall_death ) {
 				dead( );
 			}
 
-			jump = false;
+			_jump = false;
 		}
 
 		if ( other.gameObject.tag == "Enemy" ) {
@@ -140,13 +135,19 @@ public class PlayerController : MonoBehaviour {
 	// 生成岩当たり判定
 	public void RelayOnTrigger( Collider2D other, int pos ) {
 		if ( pos == 1 ) { // 上
-			jump = false;
+			_jump = false;
 		}
 		if ( pos == 2 ) { // 左
-			operate_range = true;
+			_operate_range = true;
 		}
 		if ( pos == 3 ) { // 右
-			operate_range = true;
+			_operate_range = true;
+		}
+	}
+
+	void OnTriggerEnter2D( Collider2D other ) {
+		if ( other.gameObject.tag == "Goal" ) {
+			gm.playerGoal( );
 		}
 	}
 
@@ -157,8 +158,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		anim.SetFloat( "WalkSpeed", walk_speed );
 
-		if ( generate ) {
-			anim.SetBool( "Generate", generate );
+		if ( _generate ) {
+			anim.SetBool( "Generate", _generate );
 		}
 	}
 }
