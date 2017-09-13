@@ -46,7 +46,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Character\EnemyController.cs" />
+     <Compile Include="Assets\Scripts\Character\CircleUpsideControl.cs" />
+     <Compile Include="Assets\Scripts\Character\EnemyCircleController.cs" />
      <Compile Include="Assets\Scripts\Character\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Fader\CanvasFader.cs" />
      <Compile Include="Assets\Scripts\Fader\SceneNavigator.cs" />

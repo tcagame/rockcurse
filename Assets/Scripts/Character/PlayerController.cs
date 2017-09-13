@@ -146,7 +146,8 @@ public class PlayerController : MonoBehaviour {
 	void OnCollisionEnter2D( Collision2D other ) {
 		if ( other.gameObject.tag == "Floor" || 
 			other.gameObject.name == "Upside" ||
-			other.gameObject.tag == "Switch" ) {
+			other.gameObject.tag == "Switch" ||
+			other.gameObject.tag == "Block" ) {
 
 			if ( _fall_death ) {
 				dead( );

@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Goal
   - Switch
+  - Block
   layers:
   - Default
   - TransparentFX

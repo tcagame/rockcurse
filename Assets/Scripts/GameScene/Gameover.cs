@@ -29,6 +29,6 @@ public class Gameover : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked2( ) {
-		SceneNavigator.Instance.Change( "Title", 1.5f );
+		SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
 	}
 }

@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class RockLeftsideControl : MonoBehaviour {
 
+	GameObject _player;
 	PlayerController pCtrl;
 
 	// Use this for initialization
 	void Start () {
-		GameObject _player = GameObject.FindGameObjectWithTag ("Player").gameObject;
+		_player = GameObject.FindGameObjectWithTag ("Player").gameObject;
 		pCtrl = _player.GetComponent< PlayerController >( );
 	}
 
