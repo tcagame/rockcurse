@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour {
 	const float SPEED = 5.0f;
 	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.0f;
-	const int GENROCK_COUNT = 3;
+	const int GENROCK_COUNT = 5;
 	const float FLAP = 250.0f;
 
 	bool _jump;
@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	float axis;
 	float axis_x;
 	float duration;
+	float anim_nomalized_time;
 
 	Vector3 PUSH_POS;
 
@@ -39,6 +40,7 @@ public class PlayerController : MonoBehaviour {
 		_jump = true;
 		_operate_range = false;
 		_generate = false;
+		_dead = false;
 		axis = 0;
 		axis_x = 0;
 	}
@@ -47,10 +49,12 @@ public class PlayerController : MonoBehaviour {
 		axis_x = Input.GetAxis("Horizontal");
 		animstate = anim.GetCurrentAnimatorStateInfo (0);
 		duration = animstate.length;
+		anim_nomalized_time = animstate.normalizedTime;
 
 		ActionUpdate( );
 		getFallSpeed( );
 		AnimatorUpdate( );
+		waitDeadAnimation( );
 	}
 
 	void FixedUpdate( ) {
@@ -105,7 +109,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// 生成アニメーション待ちして生成
-		if ( _generate && duration >= 1.08f ) {
+		if ( _generate && duration >= 1.0f && anim_nomalized_time >= 0.5f ) {
 			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 			Instantiate( rock, transform.position + transform.right * -2.0f, Quaternion.identity );
 			_generate = false;
@@ -124,12 +128,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void dead( ) {
-		gm.playerDead( );
-		Destroy( gameObject ); // あとで使う動きと入れ替え
+		_dead = true;
+	}
+
+	void waitDeadAnimation( ) {
+		Debug.Log( duration );
+		if ( _dead && duration >= 3.0f && anim_nomalized_time >= 0.9f ) {
+			gm.playerDead( );
+		}
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
-		if ( other.gameObject.tag == "Floor" || other.gameObject.name == "Upside" || other.gameObject.tag == "Switch" ) {
+		if ( other.gameObject.tag == "Floor" || 
+			other.gameObject.name == "Upside" ||
+			other.gameObject.tag == "Switch" ) {
+
 			if ( _fall_death ) {
 				dead( );
 			}
@@ -170,5 +183,6 @@ public class PlayerController : MonoBehaviour {
 
 		anim.SetBool( "isJump", _jump );
 		anim.SetBool( "isGenerate", _generate );
+		anim.SetBool( "isDead", _dead );
 	}
 }
