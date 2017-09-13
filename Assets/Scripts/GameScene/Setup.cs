@@ -8,6 +8,7 @@ public class Setup : MonoBehaviour {
 	Button Back_button;
 	// Use this for initialization
 	void Start () {
+		new GameObject( ).AddComponent< SceneNavigator >( );
 		Back_button = GameObject.Find ("BackButton").GetComponent< Button > ( );
 
 		Back_button.Select( ); 
@@ -18,7 +19,7 @@ public class Setup : MonoBehaviour {
 		
 	}
 	public void SceneLoad( ){
-		FadeManager.Instance.LoadScene( "title", 1.5f );
+		SceneNavigator.Instance.Change( "Title", 1.5f );
 	}
 
 	public void OnStartButtonClicked1( ){

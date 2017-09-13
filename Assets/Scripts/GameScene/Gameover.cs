@@ -11,6 +11,7 @@ public class Gameover : MonoBehaviour {
 
 	// Use this for initialization
 	void Start ( ) {
+		new GameObject( ).AddComponent< SceneNavigator >( );
 		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
 		continue_game = GameObject.Find("Continue_1").GetComponent< Button >( );
 
@@ -22,10 +23,10 @@ public class Gameover : MonoBehaviour {
 		
 	}
 	public void OnStartButtonClicked1( ) {
-		FadeManager.Instance.LoadScene( "map1", 1.5f );
+		SceneNavigator.Instance.Change( "map1", 1.5f );
 	}
 
 	public void OnStartButtonClicked2( ) {
-		FadeManager.Instance.LoadScene( "Title", 1.5f );
+		SceneNavigator.Instance.Change( "Title", 1.5f );
 	}
 }

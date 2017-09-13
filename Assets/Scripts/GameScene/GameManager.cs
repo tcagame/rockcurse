@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
 	string _next_scene;
 
 	private void Awake( ) {
+		new GameObject( ).AddComponent< SceneNavigator >( );
 		state = GAME_STATE.PLAY;
 
 		checkSceneIndex( );
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviour {
 	private void deadUpdate( ) {
 		if ( state == GAME_STATE.DEAD ) {
 			//ゲームオーバーへ遷移
-			FadeManager.Instance.LoadScene( "GameOver", 1.0f );
+			SceneNavigator.Instance.Change( "GameOver", 1.0f );
 		} else {
 			state = GAME_STATE.PLAY;
 		}
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour {
 	private void goalUpdate( ) {
 		if ( state == GAME_STATE.GOAL ) {
 			//次のマップへ遷移
-			FadeManager.Instance.LoadScene( _next_scene, 2.0f );
+			SceneNavigator.Instance.Change( _next_scene, 2.0f );
 			Resources.UnloadUnusedAssets( );
 		} else {
 			state = GAME_STATE.PLAY;

@@ -17,6 +17,7 @@ public class Menu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		new GameObject( ).AddComponent< SceneNavigator >( );
 		//sel = GetComponent<Selectable> ();
 		game_main = GameObject.Find ("start").GetComponent< Button > ( );
 
@@ -29,7 +30,7 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ){
-		FadeManager.Instance.LoadScene( "map1", 3.0f );
+		SceneNavigator.Instance.Change( "map1", 2.5f );
 	}
 
 	public void OnStartButtonClicked2(){
@@ -41,12 +42,12 @@ public class Menu : MonoBehaviour {
             Destroy(prefab, 2.0f);
 			//FadeManager.Instance.LoadScene( "main", 3.0f );
 		} else {
-			FadeManager.Instance.LoadScene( "continue", 1.5f );
+			SceneNavigator.Instance.Change( "continue", 1.5f );
 		}
 	}
 
 	public void OnStartButtonClicked3(){
-		FadeManager.Instance.LoadScene( "set", 1.5f );
+		SceneNavigator.Instance.Change( "set", 1.5f );
 	}
 
 	public void GameEnd( ){
