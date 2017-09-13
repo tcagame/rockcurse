@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 	Rigidbody2D rb2d;
 	Animator anim;
 	GameManager gm;
+	AnimatorStateInfo animstate;
+
 
 	const float SPEED = 5.0f;
 	const float DEATH_FALLSPD = -10.0f;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour {
 	bool _dead;
 	float axis;
 	float axis_x;
+	float duration;
 
 	Vector3 PUSH_POS;
 
@@ -42,10 +45,12 @@ public class PlayerController : MonoBehaviour {
 
 	void Update ( ) {
 		axis_x = Input.GetAxis("Horizontal");
+		animstate = anim.GetCurrentAnimatorStateInfo (0);
+		duration = animstate.length;
 
 		ActionUpdate( );
 		getFallSpeed( );
-		//AnimatorUpdate( );
+		AnimatorUpdate( );
 	}
 
 	void FixedUpdate( ) {
@@ -96,9 +101,14 @@ public class PlayerController : MonoBehaviour {
 		if ( Input.GetButtonDown("X") ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
 				_generate = true;
-				GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
-				Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
 			}
+		}
+
+		// 生成アニメーション待ちして生成
+		if ( _generate && duration >= 1.08f ) {
+			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
+			Instantiate( rock, transform.position + transform.right * -2.0f, Quaternion.identity );
+			_generate = false;
 		}
 	}
 
@@ -158,8 +168,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		anim.SetFloat( "WalkSpeed", walk_speed );
 
-		if ( _generate ) {
-			anim.SetBool( "Generate", _generate );
-		}
+		anim.SetBool( "isJump", _jump );
+		anim.SetBool( "isGenerate", _generate );
 	}
 }
