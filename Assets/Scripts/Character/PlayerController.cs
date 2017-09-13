@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour {
 	bool _operate_range;
 	bool _generate;
 	bool _dead;
+	bool _inputcut;
 	float axis;
 	float axis_x;
 	float duration;
@@ -41,13 +42,14 @@ public class PlayerController : MonoBehaviour {
 		_operate_range = false;
 		_generate = false;
 		_dead = false;
+		_inputcut = false;
 		axis = 0;
 		axis_x = 0;
 	}
 
 	void Update ( ) {
 		axis_x = Input.GetAxis("Horizontal");
-		animstate = anim.GetCurrentAnimatorStateInfo (0);
+		animstate = anim.GetCurrentAnimatorStateInfo(0);
 		duration = animstate.length;
 		anim_nomalized_time = animstate.normalizedTime;
 
@@ -70,19 +72,19 @@ public class PlayerController : MonoBehaviour {
 
 	void ActionUpdate( ) {
 		// 移動
-		if ( axis_x > 0 ) {
+		if ( axis_x > 0 && !_inputcut ) {
 			axis = SPEED * axis_x;
 			rb2d.AddForce ( Vector3.right * axis );
 			transform.LookAt( transform.position + Vector3.back );
 		}
 
-		if ( axis_x < 0 ) {
+		if ( axis_x < 0 && !_inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 		}
 
 		// ジャンプ
-		if ( Input.GetButtonDown("A") && !_jump ) {
+		if ( Input.GetButtonDown("A") && !_jump && !_inputcut ) {
 			rb2d.AddForce( Vector3.up * FLAP );
 			_jump = true;
 		}
@@ -100,11 +102,12 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩生成
 	void generateRock( ) {
-		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
+		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag("Rock");
 
-		if ( Input.GetButtonDown("X") ) {
+		if ( Input.GetButtonDown("X") && !_inputcut ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
 				_generate = true;
+				_inputcut = true;
 			}
 		}
 
@@ -113,6 +116,7 @@ public class PlayerController : MonoBehaviour {
 			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 			Instantiate( rock, transform.position + transform.right * -2.0f, Quaternion.identity );
 			_generate = false;
+			_inputcut = false;
 		}
 	}
 
@@ -129,11 +133,13 @@ public class PlayerController : MonoBehaviour {
 
 	void dead( ) {
 		_dead = true;
+		_inputcut = true;
 	}
 
 	void waitDeadAnimation( ) {
 		if ( _dead && duration >= 3.0f && anim_nomalized_time >= 0.9f ) {
 			gm.playerDead( );
+			_inputcut = false;
 		}
 	}
 
