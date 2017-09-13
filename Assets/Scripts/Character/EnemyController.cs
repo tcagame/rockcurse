@@ -18,12 +18,12 @@ public class EnemyController : MonoBehaviour {
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
+		height = gameObject.GetComponent< SpriteRenderer >( ).bounds.size.y;
 	}
 
 	void Start ( ) {
 		jump = false;
 		move_vec = Vector3.right;
-		height = gameObject.GetComponent< SpriteRenderer > ().bounds.size.y;
 		target_height = 0;
 	}
 	

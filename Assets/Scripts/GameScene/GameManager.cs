@@ -25,20 +25,27 @@ public class GameManager : MonoBehaviour {
 	GAME_STATE state;
 	MAP map;
 
+	GameObject gameover;
+
 	string CurrentSceneIndex;
-	string _current_scene;
+	public string _current_scene;
 	string _next_scene;
+	bool _gameover;
 
 	private void Awake( ) {
 		new GameObject( ).AddComponent< SceneNavigator >( );
+		gameover = GameObject.Find("Gameover_BG").gameObject;
+		gameover.gameObject.SetActive( _gameover );
 		state = GAME_STATE.PLAY;
 
 		checkSceneIndex( );
 	}
+
+	private void Start( ) {
+		_gameover = false;
+	}
 	
-	private void Update( ) {
-
-
+ 	private void Update( ) {
 		switch ( state ) {
 		case GAME_STATE.PLAY:
 			break;
@@ -85,7 +92,9 @@ public class GameManager : MonoBehaviour {
 	private void deadUpdate( ) {
 		if ( state == GAME_STATE.DEAD ) {
 			//ゲームオーバーへ遷移
-			SceneNavigator.Instance.Change( "GameOver", 1.0f );
+			_gameover = true;
+			GameObject.Find("Canvas").transform.Find("Gameover_BG").gameObject.SetActive( _gameover );
+			//SceneNavigator.Instance.Change( "GameOver", 1.0f );
 		} else {
 			state = GAME_STATE.PLAY;
 		}
