@@ -132,7 +132,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void waitDeadAnimation( ) {
-		Debug.Log( duration );
 		if ( _dead && duration >= 3.0f && anim_nomalized_time >= 0.9f ) {
 			gm.playerDead( );
 		}
