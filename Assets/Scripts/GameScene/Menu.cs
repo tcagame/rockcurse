@@ -51,6 +51,6 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void GameEnd( ){
-		UnityEditor.EditorApplication.isPlaying = false;
+		Application.Quit( );
 	}
 }
