@@ -4,14 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Setup : MonoBehaviour {
-	
+    public BGM_Volume_Change bgm_volume_change;
 	Button Back_button;
 	// Use this for initialization
 	void Start () {
 		new GameObject( ).AddComponent< SceneNavigator >( );
 		Back_button = GameObject.Find ("BackButton").GetComponent< Button > ( );
 
-		Back_button.Select( ); 
+		Back_button.Select( );
 	}
 	
 	// Update is called once per frame
@@ -23,11 +23,11 @@ public class Setup : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ){
-		Debug.Log ("BGM1");
+        Debug.Log ("BGM1");
 	}
 	public void OnStartButtonClicked2( ){
 		Debug.Log ("BGM2");
-	}
+    }
 	public void OnStartButtonClicked3( ){
 		Debug.Log ("BGM3");
 	}
