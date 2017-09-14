@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyCircleController : MonoBehaviour {
 
-	Rigidbody2D rb2d;
-
 	GameObject leftside;
 	GameObject rightside;
 
@@ -17,7 +15,6 @@ public class EnemyCircleController : MonoBehaviour {
 	Vector3 look_vec;
 
 	void Awake( ) {
-		rb2d = GetComponent< Rigidbody2D >( );
 		upsidectrl = transform.Find ("Upside").gameObject.GetComponent< CircleUpsideControl >( );
 	}
 
