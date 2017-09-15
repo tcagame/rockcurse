@@ -10,30 +10,27 @@ public class BGM_Volume_Change : MonoBehaviour {
     {
         audioSource = GetComponent<AudioSource>();
     }
-    void Update() {
-        
-    }
-    public void OnStartButtonClicked1()
+    public void OnStartButtonClickedBGM1()
     {
         audioSource.volume = 0.2f;
         Debug.Log(audioSource.volume);
     }
-    public void OnStartButtonClicked2()
+    public void OnStartButtonClickedBGM2()
     {
         audioSource.volume = 0.4f;
         Debug.Log(audioSource.volume);
     }
-    public void OnStartButtonClicked3()
+    public void OnStartButtonClickedBGM3()
     {
         audioSource.volume = 0.6f;
         Debug.Log(audioSource.volume);
     }
-    public void OnStartButtonClicked4()
+    public void OnStartButtonClickedBGM4()
     {
         audioSource.volume = 0.8f;
         Debug.Log(audioSource.volume);
     }
-    public void OnStartButtonClicked5()
+    public void OnStartButtonClickedBGM5()
     {
         audioSource.volume = 1f;
         Debug.Log(audioSource.volume);
