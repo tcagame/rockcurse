@@ -83,6 +83,16 @@ public class PlayerController : MonoBehaviour {
 			transform.LookAt( transform.position + Vector3.forward );
 		}
 
+		// デバッグ用キーボード移動対応
+		if ( Input.GetKey( KeyCode.A ) && !_inputcut ) {
+			rb2d.AddForce ( Vector3.left * SPEED );
+			transform.LookAt( transform.position + Vector3.forward );
+		}
+		if ( Input.GetKey( KeyCode.D ) && !_inputcut ) {
+			rb2d.AddForce ( Vector3.right * SPEED );
+			transform.LookAt( transform.position + Vector3.back );
+		}
+
 		// ジャンプ
 		if ( Input.GetButtonDown("A") && !_jump && !_inputcut ) {
 			rb2d.AddForce( Vector3.up * FLAP );

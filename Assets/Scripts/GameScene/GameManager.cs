@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour {
 	private void goalUpdate( ) {
 		if ( state == GAME_STATE.GOAL ) {
 			//次のマップへ遷移
-			SceneNavigator.Instance.Change( _next_scene, 2.0f );
+			SceneNavigator.Instance.Change( _next_scene, 1.5f );
 			Resources.UnloadUnusedAssets( );
 		} else {
 			state = GAME_STATE.PLAY;
