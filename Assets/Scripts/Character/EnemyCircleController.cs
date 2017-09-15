@@ -80,7 +80,7 @@ public class EnemyCircleController : MonoBehaviour {
 		_isdead = true;
 
 
-		if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.6f ) {
+		if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.45f ) {
 			fade_time -= Time.deltaTime;
 
 			if ( fade_time > 0 ) {
