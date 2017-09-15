@@ -10,8 +10,8 @@ public class RockControl : MonoBehaviour {
 
 	Color color;
 
-	const float GEN_TIME = 1.0f;
-	const float LIMIT_TIME = 2.0f;
+	const float GEN_TIME = 1.0f; //生成フェードイン時間
+	const float LIMIT_TIME = 2.0f; //点滅開始時間
 
 	float alpha;
 	float generate_time;
