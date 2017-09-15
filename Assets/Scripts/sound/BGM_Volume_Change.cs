@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BGM_Volume_Change : MonoBehaviour {
     // Use this for initialization
@@ -8,6 +9,7 @@ public class BGM_Volume_Change : MonoBehaviour {
 
     void Start()
     {
+        //audioSourceの値を取得
         audioSource = GetComponent<AudioSource>();
     }
     public void OnStartButtonClickedBGM1()
@@ -34,5 +36,10 @@ public class BGM_Volume_Change : MonoBehaviour {
     {
         audioSource.volume = 1f;
         Debug.Log(audioSource.volume);
+    }
+
+    private class SaveSound
+    {
+        public static float value_bgm { get; internal set; }
     }
 }

@@ -19,7 +19,7 @@ public class Setup : MonoBehaviour {
 		
 	}
 	public void SceneLoad( ){
-		SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
+        SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
 	}
 
 	public void OnStartButtonClicked1( ){
