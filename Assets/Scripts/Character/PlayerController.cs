@@ -10,7 +10,6 @@ public class PlayerController : MonoBehaviour {
 	GameManager gm;
 	AnimatorStateInfo animstate;
 
-
 	const float SPEED = 5.0f;
 	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.0f;
@@ -84,11 +83,11 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		// デバッグ用キーボード移動対応
-		if ( Input.GetKey( KeyCode.A ) && !_inputcut ) {
+		if ( Input.GetKey( KeyCode.LeftArrow ) && !_inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 		}
-		if ( Input.GetKey( KeyCode.D ) && !_inputcut ) {
+		if ( Input.GetKey( KeyCode.RightArrow ) && !_inputcut ) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
 		}

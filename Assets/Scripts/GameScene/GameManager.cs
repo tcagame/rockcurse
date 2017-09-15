@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour {
 			_next_scene = "map6";
 			break;
 		case "map6":
-			_next_scene = "Title";
+			_next_scene = "thanks";
 			break;
 		}
 		return _next_scene;
@@ -94,7 +94,6 @@ public class GameManager : MonoBehaviour {
 			//ゲームオーバーへ遷移
 			_gameover = true;
 			GameObject.Find("Canvas").transform.Find("Gameover_BG").gameObject.SetActive( _gameover );
-			//SceneNavigator.Instance.Change( "GameOver", 1.0f );
 		} else {
 			state = GAME_STATE.PLAY;
 		}

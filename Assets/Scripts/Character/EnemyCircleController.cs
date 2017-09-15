@@ -56,8 +56,8 @@ public class EnemyCircleController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
-		if ( other.gameObject.tag == "Block" ||
-			other.gameObject.tag == "Switch" ||
+		if ( other.gameObject.tag == "Block" && frontctrl._jump ||
+			other.gameObject.tag == "Switch" && frontctrl._jump ||
 			other.gameObject.tag == "Rock" && frontctrl._jump ) {
 			jump( );
 		}
