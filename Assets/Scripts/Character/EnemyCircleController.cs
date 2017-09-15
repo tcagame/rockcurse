@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EnemyCircleController : MonoBehaviour {
 
-	GameObject leftside;
-	GameObject rightside;
+	Rigidbody2D rb2d;
 
 	CircleUpsideControl upsidectrl;
+	CircleFrontControl frontctrl;
 
 	const float SPEED = 0.01f;
 
@@ -15,7 +15,9 @@ public class EnemyCircleController : MonoBehaviour {
 	Vector3 look_vec;
 
 	void Awake( ) {
-		upsidectrl = transform.Find ("Upside").gameObject.GetComponent< CircleUpsideControl >( );
+		rb2d = GetComponent< Rigidbody2D >( );
+		upsidectrl = transform.Find("Upside").gameObject.GetComponent< CircleUpsideControl >( );
+		frontctrl = transform.Find("Front").gameObject.GetComponent< CircleFrontControl >( );
 	}
 
 	void Start ( ) {
@@ -45,11 +47,21 @@ public class EnemyCircleController : MonoBehaviour {
 		}
 	}
 
+	void jump( ) {
+		rb2d.AddForce( new Vector3( 100.0f, 1500.0f, 0 ) );
+	}
+
 	void dead( ) {
 		Destroy( gameObject );
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
+		if ( other.gameObject.tag == "Block" ||
+			other.gameObject.tag == "Switch" ||
+			other.gameObject.tag == "Rock" && frontctrl._jump ) {
+			jump( );
+		}
+
 		if ( other.gameObject.tag == "Block" ) {
 			if ( move_vec == Vector3.left ) {
 				move_vec = Vector3.right;
