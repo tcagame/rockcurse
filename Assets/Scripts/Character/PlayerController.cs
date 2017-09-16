@@ -132,10 +132,10 @@ public class PlayerController : MonoBehaviour {
 	void getFallSpeed( ) {
 		float fall_vel = rb2d.velocity.y;
 
+		if ( transform.position.y < -15.0f ) {
+			dead( );
+		}
 		if ( fall_vel < DEATH_FALLSPD ) {
-			if ( transform.position.y < -12.0f ) {
-				dead( );
-			}
 			fall_death = true;
 		}
 	}
