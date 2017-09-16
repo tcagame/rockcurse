@@ -16,13 +16,13 @@ public class PlayerController : MonoBehaviour {
 	const int GENROCK_COUNT = 3;
 	const float FLAP = 250.0f;
 
-	bool _jump;
-	bool _attach;
-	bool _fall_death;
-	bool _operate_range;
-	bool _generate;
-	bool _dead;
-	bool _inputcut;
+	bool jump;
+	bool attach;
+	bool fall_death;
+	bool operate_range;
+	bool generate;
+	bool isdead;
+	bool inputcut;
 	float axis;
 	float axis_x;
 	float duration;
@@ -37,11 +37,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Start ( ) {
-		_jump = true;
-		_operate_range = false;
-		_generate = false;
-		_dead = false;
-		_inputcut = false;
+		jump = true;
+		operate_range = false;
+		generate = false;
+		isdead = false;
+		isdead = false;
 		axis = 0;
 		axis_x = 0;
 	}
@@ -71,31 +71,31 @@ public class PlayerController : MonoBehaviour {
 
 	void ActionUpdate( ) {
 		// 移動
-		if ( axis_x > 0 && !_inputcut ) {
+		if ( axis_x > 0 && !inputcut ) {
 			axis = SPEED * axis_x;
 			rb2d.AddForce ( Vector3.right * axis );
 			transform.LookAt( transform.position + Vector3.back );
 		}
 
-		if ( axis_x < 0 && !_inputcut ) {
+		if ( axis_x < 0 && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 		}
 
 		// デバッグ用キーボード移動対応
-		if ( Input.GetKey( KeyCode.LeftArrow ) && !_inputcut ) {
+		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 		}
-		if ( Input.GetKey( KeyCode.RightArrow ) && !_inputcut ) {
+		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
 		}
 
 		// ジャンプ
-		if ( Input.GetButtonDown("A") && !_jump && !_inputcut ) {
+		if ( Input.GetButtonDown("A") && !jump && !inputcut ) {
 			rb2d.AddForce( Vector3.up * FLAP );
-			_jump = true;
+			jump = true;
 		}
 
 		generateRock( );
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩押し引き
 	void movingRock( ) {
-		if ( Input.GetButtonDown("B") && _operate_range ) {
+		if ( Input.GetButtonDown("B") && operate_range ) {
 			
 		}
 	}
@@ -113,19 +113,19 @@ public class PlayerController : MonoBehaviour {
 	void generateRock( ) {
 		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag("Rock");
 
-		if ( Input.GetButtonDown("X") && !_inputcut ) {
+		if ( Input.GetButtonDown("X") && !inputcut ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
-				_generate = true;
-				_inputcut = true;
+				generate = true;
+				inputcut = true;
 			}
 		}
 
 		// 生成アニメーション待ちして生成
-		if ( _generate && duration >= 1.0f && anim_nomalized_time >= 0.5f ) {
+		if ( generate && duration >= 1.0f && anim_nomalized_time >= 0.5f ) {
 			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 			Instantiate( rock, transform.position + transform.right * -2.0f, Quaternion.identity );
-			_generate = false;
-			_inputcut = false;
+			generate = false;
+			inputcut = false;
 		}
 	}
 
@@ -136,19 +136,19 @@ public class PlayerController : MonoBehaviour {
 			if ( transform.position.y < -12.0f ) {
 				dead( );
 			}
-			_fall_death = true;
+			fall_death = true;
 		}
 	}
 
 	void dead( ) {
-		_dead = true;
-		_inputcut = true;
+		isdead = true;
+		inputcut = true;
 	}
 
 	void waitDeadAnimation( ) {
-		if ( _dead && duration >= 3.0f && anim_nomalized_time >= 0.9f ) {
+		if ( isdead && duration >= 3.0f && anim_nomalized_time >= 0.9f ) {
 			gm.playerDead( );
-			_inputcut = false;
+			inputcut = false;
 		}
 	}
 
@@ -158,11 +158,11 @@ public class PlayerController : MonoBehaviour {
 			other.gameObject.tag == "Switch" ||
 			other.gameObject.tag == "Block" ) {
 
-			if ( _fall_death ) {
+			if ( fall_death ) {
 				dead( );
 			}
 
-			_jump = false;
+			jump = false;
 		}
 
 		if ( other.gameObject.tag == "Enemy" ) {
@@ -173,13 +173,13 @@ public class PlayerController : MonoBehaviour {
 	// 生成岩当たり判定
 	public void RelayOnTrigger( Collider2D other, int pos ) {
 		if ( pos == 1 ) { // 上
-			_jump = false;
+			jump = false;
 		}
 		if ( pos == 2 ) { // 左
-			_operate_range = true;
+			operate_range = true;
 		}
 		if ( pos == 3 ) { // 右
-			_operate_range = true;
+			operate_range = true;
 		}
 	}
 
@@ -196,8 +196,8 @@ public class PlayerController : MonoBehaviour {
 		}
 		anim.SetFloat( "WalkSpeed", walk_speed );
 
-		anim.SetBool( "isJump", _jump );
-		anim.SetBool( "isGenerate", _generate );
-		anim.SetBool( "isDead", _dead );
+		anim.SetBool( "isJump", jump );
+		anim.SetBool( "isGenerate", generate );
+		anim.SetBool( "isDead", isdead );
 	}
 }
