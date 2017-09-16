@@ -37,9 +37,4 @@ public class BGM_Volume_Change : MonoBehaviour {
         audioSource.volume = 1f;
         Debug.Log(audioSource.volume);
     }
-
-    private class SaveSound
-    {
-        public static float value_bgm { get; internal set; }
-    }
 }
