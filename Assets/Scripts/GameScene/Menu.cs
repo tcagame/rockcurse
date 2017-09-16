@@ -5,28 +5,37 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour {
+	
+	Button game_main;
+
     public GameObject nodata_window;
     public GameObject parentObject;
     GameObject obj;
     GameObject prefab;
+
+
 	public bool LoadGames;
+	const float CHANGESCENE_COUNT = 20.0f;
 
-	Button game_main;
+	float change_count;
 
-	//Selectable sel;
-
-	// Use this for initialization
-	void Start () {
+	void Start( ) {
 		new GameObject( ).AddComponent< SceneNavigator >( );
-		//sel = GetComponent<Selectable> ();
-		game_main = GameObject.Find ("start").GetComponent< Button > ( );
-
+		game_main = GameObject.Find ("start").GetComponent< Button >( );
 		game_main.Select( ); 
+		change_count = CHANGESCENE_COUNT;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+	void Update( ) {
+		loadMovieCountdown( );
+	}
+
+	void loadMovieCountdown( ) {
+		change_count -= Time.deltaTime;
+
+		if ( change_count < 0 ) {
+			SceneNavigator.Instance.Change( "PromoMov", 2.0f );
+		}
 	}
 
 	public void OnStartButtonClicked1( ){

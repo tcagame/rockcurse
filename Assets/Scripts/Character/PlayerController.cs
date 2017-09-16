@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour {
 		operate_range = false;
 		generate = false;
 		isdead = false;
-		isdead = false;
 		axis = 0;
 		axis_x = 0;
 	}
@@ -53,7 +52,7 @@ public class PlayerController : MonoBehaviour {
 		anim_nomalized_time = animstate.normalizedTime;
 
 		if ( transform.position.y < -20.0f ) {
-			dead( );
+			gm.playerDead( );
 		}
 
 		ActionUpdate( );

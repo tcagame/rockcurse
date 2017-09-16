@@ -12,6 +12,7 @@ public class RockControl : MonoBehaviour {
 
 	const float GEN_TIME = 1.0f; //生成フェードイン時間
 	const float LIMIT_TIME = 2.0f; //点滅開始時間
+	const float DESTROY_HEIGHT = -20.0f;
 
 	float alpha;
 	float generate_time;
@@ -37,6 +38,10 @@ public class RockControl : MonoBehaviour {
 		GenerateUpdate( );
 		DestroyUpdate( );
 		AnimationUpdate( );
+
+		if ( transform.position.y < DESTROY_HEIGHT ) {
+			Destroy( gameObject );
+		}
 	}
 
 	void GenerateUpdate( ) {
