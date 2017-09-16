@@ -6,7 +6,6 @@ public class EnemyCircleController : MonoBehaviour {
 
 	Rigidbody2D rb2d;
 	Animator anim;
-	PolygonCollider2D polycol2d;
 	AnimatorStateInfo animstate;
 	SpriteRenderer sr;
 	Color color;
@@ -30,7 +29,6 @@ public class EnemyCircleController : MonoBehaviour {
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
 		anim = GetComponent< Animator >( );
-		polycol2d = GetComponent< PolygonCollider2D >( );
 		sr = GetComponent< SpriteRenderer >( );
 		upsidectrl = transform.Find("Upside").gameObject.GetComponent< CircleUpsideControl >( );
 		frontctrl = transform.Find("Front").gameObject.GetComponent< CircleFrontControl >( );
