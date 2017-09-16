@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour {
 		duration = animstate.length;
 		anim_nomalized_time = animstate.normalizedTime;
 
+		if ( transform.position.y < -20.0f ) {
+			dead( );
+		}
+
 		ActionUpdate( );
 		getFallSpeed( );
 		AnimatorUpdate( );
@@ -132,9 +136,6 @@ public class PlayerController : MonoBehaviour {
 	void getFallSpeed( ) {
 		float fall_vel = rb2d.velocity.y;
 
-		if ( transform.position.y < -15.0f ) {
-			dead( );
-		}
 		if ( fall_vel < DEATH_FALLSPD ) {
 			fall_death = true;
 		}

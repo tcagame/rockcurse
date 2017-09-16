@@ -23,7 +23,7 @@ public class SwitchControl : MonoBehaviour {
 	}
 
 	void Press( ) {
-		if ( transform.position.y > -7.95f ) {
+		if ( transform.position.y > -7.85f ) {
 			transform.position = transform.position + new Vector3( 0, SPEED, 0 );
 		} else {
 			Destroy( gameObject );

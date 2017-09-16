@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class ThanksControl : MonoBehaviour {
 
-	AnimatorStateInfo animstate;
 	SpriteRenderer sr;
 
 	Color color;
 
 	const float FADE_TIME = 0.0f;
 
-	float duration;
-	float anim_nomalized_time;
 	float alpha;
 	float fade_time;
 	bool inputcut;
@@ -30,9 +27,6 @@ public class ThanksControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update( ) {
-		duration = animstate.length;
-		anim_nomalized_time = animstate.normalizedTime;
-
 		fadeinUpdate( );
 		if ( !inputcut ) {
 			inputUpdate( );

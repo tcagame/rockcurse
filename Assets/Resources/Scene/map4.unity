@@ -227,7 +227,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1410277348922034, guid: a1137e1978aa41746a4a407f237c2901, type: 2}
       propertyPath: m_TagString
-      value: Untagged
+      value: Block
       objectReference: {fileID: 0}
     - target: {fileID: 1410277348922034, guid: a1137e1978aa41746a4a407f237c2901, type: 2}
       propertyPath: m_Name
@@ -3404,7 +3404,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 21
   m_Sprite: {fileID: 21300006, guid: c1467afbe81dac54fb68aae9d61de16b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
