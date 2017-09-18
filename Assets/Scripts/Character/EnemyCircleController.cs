@@ -41,7 +41,6 @@ public class EnemyCircleController : MonoBehaviour {
 		fade_time = FADE_TIME;
 	}
 	
-	// Update is called once per frame
 	void Update ( ) {
 		animstate = anim.GetCurrentAnimatorStateInfo(0);
 		duration = animstate.length;
@@ -76,7 +75,6 @@ public class EnemyCircleController : MonoBehaviour {
 
 	private void dead( ) {
 		_isdead = true;
-
 
 		if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.45f ) {
 			fade_time -= Time.deltaTime;

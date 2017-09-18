@@ -39,9 +39,6 @@ public class SingletonMonoBehaviour<T> : MonoBehaviourWithInit where T : MonoBeh
     if(this == Instance){
       return;
     }
-
-    //自分じゃない場合は重複して存在しているので、エラー
-    Debug.LogError (typeof(T) + " is duplicated");
   }
 
 }
