@@ -5,36 +5,12 @@ using UnityEngine.UI;
 
 public class BGM_Volume_Change : MonoBehaviour {
     // Use this for initialization
-    AudioSource audioSource;
-
-    void Start()
+    [SerializeField]
+    UnityEngine.Audio.AudioMixer mixer;
+  
+    public float masterVolume
     {
-        //audioSourceの値を取得
-        audioSource = GetComponent<AudioSource>();
+        set { mixer.SetFloat("BGM", Mathf.Lerp(-80, 0, value)); }
     }
-    public void OnStartButtonClickedBGM1()
-    {
-        audioSource.volume = 0.2f;
-        Debug.Log(audioSource.volume);
-    }
-    public void OnStartButtonClickedBGM2()
-    {
-        audioSource.volume = 0.4f;
-        Debug.Log(audioSource.volume);
-    }
-    public void OnStartButtonClickedBGM3()
-    {
-        audioSource.volume = 0.6f;
-        Debug.Log(audioSource.volume);
-    }
-    public void OnStartButtonClickedBGM4()
-    {
-        audioSource.volume = 0.8f;
-        Debug.Log(audioSource.volume);
-    }
-    public void OnStartButtonClickedBGM5()
-    {
-        audioSource.volume = 1f;
-        Debug.Log(audioSource.volume);
-    }
+    
 }
