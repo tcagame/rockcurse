@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour {
 			//次のマップへ遷移
 			if ( _next_scene == "thanks" ) {
 				SceneNavigator.Instance.Change( _next_scene, 2.5f );
+				Resources.UnloadUnusedAssets( );
 			} else {
 				SceneNavigator.Instance.Change( _next_scene, 1.5f );
 				Resources.UnloadUnusedAssets( );
