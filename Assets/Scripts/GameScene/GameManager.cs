@@ -102,8 +102,12 @@ public class GameManager : MonoBehaviour {
 	private void goalUpdate( ) {
 		if ( state == GAME_STATE.GOAL ) {
 			//次のマップへ遷移
-			SceneNavigator.Instance.Change( _next_scene, 1.5f );
-			Resources.UnloadUnusedAssets( );
+			if ( _next_scene == "thanks" ) {
+				SceneNavigator.Instance.Change( _next_scene, 2.5f );
+			} else {
+				SceneNavigator.Instance.Change( _next_scene, 1.5f );
+				Resources.UnloadUnusedAssets( );
+			}
 		} else {
 			state = GAME_STATE.PLAY;
 		}

@@ -18,7 +18,7 @@ public class Menu : MonoBehaviour {
 	float change_count;
 
 	// Use this for initialization
-	void Start () {
+	void Start( ) {
 		new GameObject( ).AddComponent< SceneNavigator >( );
 		game_main = GameObject.Find ("start").GetComponent< Button > ( );
 
@@ -43,20 +43,20 @@ public class Menu : MonoBehaviour {
 		SceneNavigator.Instance.Change( "map1", 2.5f );
 	}
 
-	public void OnStartButtonClicked2(){
-		if (!LoadGames) {
+	public void OnStartButtonClicked2( ){
+		if ( !LoadGames ) {
 			Debug.Log( "file not found" );
             obj = (GameObject)Resources.Load( "Prefab/NoData" );
-            prefab = (GameObject)Instantiate(obj);
-            prefab.transform.SetParent(parentObject.transform, false);
-            Destroy(prefab, 2.0f);
+            prefab = (GameObject)Instantiate( obj );
+            prefab.transform.SetParent( parentObject.transform, false );
+            Destroy( prefab, 2.0f );
 			//FadeManager.Instance.LoadScene( "main", 3.0f );
 		} else {
 			SceneNavigator.Instance.Change( "continue", 1.5f );
 		}
 	}
 
-	public void OnStartButtonClicked3(){
+	public void OnStartButtonClicked3( ){
 		SceneNavigator.Instance.Change( "set", 1.5f );
 	}
 
