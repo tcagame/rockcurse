@@ -7,37 +7,27 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Resources/Scene/tgsVerTitle.unity
-    guid: 5e5ffe9c76d534643b0dcc03b632da2e
   - enabled: 0
     path: Assets/Resources/Scene/title.unity
-    guid: 79ce3bc7cb45e2f42b6defa2a382c460
+  - enabled: 0
+    path: Assets/Resources/Scene/SelectMap.unity
   - enabled: 1
     path: Assets/Resources/Scene/PromoMov.unity
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Resources/Scene/set.unity
-    guid: 8b0a06c974ad1bc4b8c8621b8967302c
   - enabled: 1
     path: Assets/Resources/Scene/GameOver.unity
-    guid: 8185592c8651440f2ac3804cc7e4f727
   - enabled: 1
     path: Assets/Resources/Scene/map1.unity
-    guid: 7d66b548f0f3646b1804f5000ed19b43
   - enabled: 1
     path: Assets/Resources/Scene/map2.unity
-    guid: 3c804e2956903584a9250918bcaa3937
   - enabled: 1
     path: Assets/Resources/Scene/map3.unity
-    guid: 2be7ea245cea8429aa6200852256b13f
   - enabled: 1
     path: Assets/Resources/Scene/map4.unity
-    guid: 5bab3903dbaf2c749815578b75f08534
   - enabled: 1
     path: Assets/Resources/Scene/map5.unity
-    guid: f3fdb6df685f54ef6bb7c8fd56ddbe5e
   - enabled: 1
     path: Assets/Resources/Scene/map6.unity
-    guid: b5b664fd8011b41e5b6b2434b39a7317
   - enabled: 1
     path: Assets/Resources/Scene/thanks.unity
-    guid: 90a05845ca5411646b34a78e3ad58d57

@@ -52,7 +52,7 @@ public class Menu : MonoBehaviour {
             Destroy( prefab, 2.0f );
 			//FadeManager.Instance.LoadScene( "main", 3.0f );
 		} else {
-			SceneNavigator.Instance.Change( "continue", 1.5f );
+			SceneNavigator.Instance.Change( "SelectMap", 1.5f );
 		}
 	}
 
