@@ -10,9 +10,9 @@ public class PlayerController : MonoBehaviour {
 	GameManager gm;
 	AnimatorStateInfo animstate;
 
-	const float SPEED = 5.0f;
+	const float SPEED = 6.0f;
 	const float DEATH_FALLSPD = -10.0f;
-	const float MAX_VEL_X = 3.0f;
+	const float MAX_VEL_X = 3.8f;
 	const int GENROCK_COUNT = 3;
 	const float FLAP = 250.0f;
 
