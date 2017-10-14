@@ -1,18 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Pauser : MonoBehaviour {
 
 	GameObject image;
+	Button Title_button;
 
 	public bool _pause;
 
 	// Use this for initialization
 	void Start ( ) {
+		
 		_pause = false;
 		image = GameObject.Find("PauseImage").gameObject;
 		image.gameObject.SetActive( _pause );
+
+		Title_button = GameObject.Find ("Button").GetComponent< Button > ( );
+
+		Title_button.Select( );
 	}
 
 	// Update is called once per frame
@@ -31,5 +38,9 @@ public class Pauser : MonoBehaviour {
 			}
 			image.gameObject.SetActive( _pause );
 		}
+	}
+
+	public void SceneLoad( ){
+		SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
 	}
 }
