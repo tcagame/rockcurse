@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour {
 	void generateRock( ) {
 		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag("Rock");
 
-		if ( Input.GetButtonDown("X") && !inputcut ) {
+		if ( Input.GetButtonDown("X") && !inputcut && !jump ) {
 			if ( rock_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;
