@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Resources/Scene/tgsVerTitle.unity
   - enabled: 0
     path: Assets/Resources/Scene/title.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Resources/Scene/SelectMap.unity
   - enabled: 1
     path: Assets/Resources/Scene/PromoMov.unity

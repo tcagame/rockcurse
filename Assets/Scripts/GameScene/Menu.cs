@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using UnityEngine.EventSystems;
 
 public class Menu : MonoBehaviour {
 	
@@ -29,8 +28,7 @@ public class Menu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update( ) {
-		loadMovieCountdown( );
-        Debug.Log(EventSystem.current.currentSelectedGameObject);
+		loadMovieCountdown ();
 	}
 
 	private void loadMovieCountdown( ) {

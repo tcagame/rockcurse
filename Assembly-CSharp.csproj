@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\GameScene\Menu.cs" />
      <Compile Include="Assets\Scripts\GameScene\MovieControl.cs" />
      <Compile Include="Assets\Scripts\GameScene\Pauser.cs" />
+     <Compile Include="Assets\Scripts\GameScene\Selectmap.cs" />
      <Compile Include="Assets\Scripts\GameScene\Setup.cs" />
      <Compile Include="Assets\Scripts\GameScene\ThanksControl.cs" />
      <Compile Include="Assets\Scripts\Object\CageControl.cs" />

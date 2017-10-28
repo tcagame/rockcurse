@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
 	public string _current_scene;
 	string _next_scene;
 	bool _gameover;
+	public static int countselect = 0;
 
 	private void Awake( ) {
 		new GameObject( ).AddComponent< SceneNavigator >( );
@@ -108,6 +109,7 @@ public class GameManager : MonoBehaviour {
 			} else {
 				SceneNavigator.Instance.Change( _next_scene, 1.5f );
 				Resources.UnloadUnusedAssets( );
+				countselect++;
 			}
 		} else {
 			state = GAME_STATE.PLAY;
@@ -124,5 +126,9 @@ public class GameManager : MonoBehaviour {
 		if ( state != GAME_STATE.GOAL ) {
 			state = GAME_STATE.GOAL;
 		}
+	}
+
+	public static int CountSelect() {
+		return countselect;
 	}
 }
