@@ -31,7 +31,7 @@ public class RockControl : MonoBehaviour {
 		alpha = 0;
 
 		limit = false;
-		destroy_time = 10.0f;
+		destroy_time = 12.5f;
 	}
 	
 	void Update( ) {
