@@ -43,13 +43,15 @@ public class EnemyCircleController : MonoBehaviour {
 	}
 	
 	void Update ( ) {
-		animstate = anim.GetCurrentAnimatorStateInfo(0);
-		duration = animstate.length;
-		anim_nomalized_time = animstate.normalizedTime;
-
-		setLookVec( );
-		ActionUpdate( );
-		AnimatorUpdate( );
+		if( Time.timeScale > 0 ) {
+			animstate = anim.GetCurrentAnimatorStateInfo(0);
+			duration = animstate.length;
+			anim_nomalized_time = animstate.normalizedTime;
+	
+			setLookVec( );
+			ActionUpdate( );
+			AnimatorUpdate( );
+		}
 	}
 
 	private void setLookVec( ) {

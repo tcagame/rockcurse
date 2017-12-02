@@ -47,19 +47,21 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Update ( ) {
-		axis_x = Input.GetAxis("Horizontal");
-		animstate = anim.GetCurrentAnimatorStateInfo(0);
-		duration = animstate.length;
-		anim_nomalized_time = animstate.normalizedTime;
+		if( Time.timeScale > 0 ) {
+			axis_x = Input.GetAxis("Horizontal");
+			animstate = anim.GetCurrentAnimatorStateInfo(0);
+			duration = animstate.length;
+			anim_nomalized_time = animstate.normalizedTime;
 
-		if ( transform.position.y < -20.0f ) {
-			gm.playerDead( );
+			if ( transform.position.y < -20.0f ) {
+				gm.playerDead( );
+			}
+
+			ActionUpdate( );
+			getFallSpeed( );
+			AnimatorUpdate( );
+			waitDeadAnimation( );
 		}
-
-		ActionUpdate( );
-		getFallSpeed( );
-		AnimatorUpdate( );
-		waitDeadAnimation( );
 	}
 
 	void FixedUpdate( ) {
