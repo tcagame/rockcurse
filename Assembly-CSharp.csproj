@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\GameScene\FadeManager.cs" />
      <Compile Include="Assets\Scripts\GameScene\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameScene\Gameover.cs" />
+     <Compile Include="Assets\Scripts\GameScene\Item.cs" />
      <Compile Include="Assets\Scripts\GameScene\Menu.cs" />
      <Compile Include="Assets\Scripts\GameScene\MovieControl.cs" />
      <Compile Include="Assets\Scripts\GameScene\Pauser.cs" />

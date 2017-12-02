@@ -25,7 +25,7 @@ public class EnemyCircleController : MonoBehaviour {
 	float anim_nomalized_time;
 	float alpha;
 	float fade_time;
-	float WaitTime = 0.5f;
+	//float WaitTime = 0.5f;
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
@@ -98,7 +98,8 @@ public class EnemyCircleController : MonoBehaviour {
 		if ( other.gameObject.tag == "Block" && frontctrl._jump ||
 		     other.gameObject.tag == "Switch" && frontctrl._jump ||
 		     other.gameObject.tag == "Rock" && frontctrl._jump ) {
-			Invoke("jump", WaitTime);
+			jump ();
+			//Invoke("jump", WaitTime);
 			//動きとめないと吹っ飛ぶ,,,
 		}
 
