@@ -4,19 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Item : MonoBehaviour {
-	GameObject image;
-	Button Item_button;
-
-	public bool _item;
+	
+	SpriteRenderer MainSpriteRenderer;
+	public Sprite _itemCube;
+	public Sprite _itemCircle;
 
 	// Use this for initialization
 	void Start () {
-		_item = false;
-		image = GameObject.Find("ItemUI").gameObject;
-		image.gameObject.SetActive(_item);
-
-		Item_button = GameObject.Find("Button").GetComponent<Button> ();
-		Item_button.Select( );
+		MainSpriteRenderer = gameObject.GetComponent<SpriteRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -25,13 +20,12 @@ public class Item : MonoBehaviour {
 	}
 
 	void SelectItem( ){
-		if (Input.GetButtonDown ("Start") ) {
-			if (_item) {
-				_item = false;
-			} else {
-				_item = true;
-			}
-			image.gameObject.SetActive (_item);
+		if ( Input.GetKey( KeyCode.J ) ) {
+			MainSpriteRenderer.sprite = _itemCube;
+		} 
+		if ( Input.GetKey( KeyCode.K ) ) {
+			MainSpriteRenderer.sprite = _itemCircle;
 		}
 	}
 }
+//lj rk
