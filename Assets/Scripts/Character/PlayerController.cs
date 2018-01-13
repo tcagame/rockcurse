@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
 	bool fall_death;
 	bool operate_range;
 	bool generate;
+	bool rock;
 	bool isdead;
 	bool inputcut;
 	float axis;
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour {
 		jump = true;
 		operate_range = false;
 		generate = false;
+		rock = true;
 		isdead = false;
 		isdead = false;
 		axis = 0;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour {
 			getFallSpeed( );
 			AnimatorUpdate( );
 			waitDeadAnimation( );
+			//Confirmation ();
 		}
 	}
 
@@ -117,10 +120,30 @@ public class PlayerController : MonoBehaviour {
 
 	// 岩生成
 	void generateRock( ) {
-		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag("Rock");
+		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
 
-		if ( Input.GetButtonDown("X") && !inputcut && !jump ) {
-			if ( rock_num.Length < GENROCK_COUNT ) {
+		if (Input.GetButtonDown ("X") && !inputcut && !jump && rock) {
+			if (rock_num.Length < GENROCK_COUNT) {
+				generate = true;
+				inputcut = true;
+			}
+		}
+
+		// 生成アニメーション待ちして生成
+		if (generate && duration >= 1.0f && anim_nomalized_time >= 0.5f) {
+			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
+			Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
+			generate = false;
+			inputcut = false;
+		}
+	}
+
+	//仮でやってみたけど色々わからなくて挫折
+	void generateStone( ) {	
+		GameObject[ ] stone_num = GameObject.FindGameObjectsWithTag("Stone");
+
+		if ( Input.GetButtonDown("X") && !inputcut && !jump && !rock) {
+			if ( stone_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;
 			}
@@ -128,8 +151,8 @@ public class PlayerController : MonoBehaviour {
 
 		// 生成アニメーション待ちして生成
 		if ( generate && duration >= 1.0f && anim_nomalized_time >= 0.5f ) {
-			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
-			Instantiate( rock, transform.position + transform.right * -2.0f, Quaternion.identity );
+			GameObject stone = (GameObject)Resources.Load ("Prefab/Stone");
+			Instantiate( stone, transform.position + transform.right * -2.0f, Quaternion.identity );
 			generate = false;
 			inputcut = false;
 		}
@@ -203,4 +226,16 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool( "isGenerate", generate );
 		anim.SetBool( "isDead", isdead );
 	}
+
+	//ごめん　わからなかった
+	/*void Confirmation( ){
+		GameObject ui = GameObject.Find ("UI");
+		ItemUI _ui = GetComponent<ItemUI> ();
+		if (_ui._itemUI [0]) {
+			rock = true;
+		} else if (_ui._itemUI [1]) {
+			rock = false;
+		}
+			
+	}*/
 }

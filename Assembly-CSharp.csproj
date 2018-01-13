@@ -57,13 +57,13 @@
      <Compile Include="Assets\Scripts\GameScene\FadeManager.cs" />
      <Compile Include="Assets\Scripts\GameScene\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameScene\Gameover.cs" />
+     <Compile Include="Assets\Scripts\GameScene\ItemUI.cs" />
      <Compile Include="Assets\Scripts\GameScene\Menu.cs" />
      <Compile Include="Assets\Scripts\GameScene\MovieControl.cs" />
      <Compile Include="Assets\Scripts\GameScene\Pauser.cs" />
      <Compile Include="Assets\Scripts\GameScene\Selectmap.cs" />
      <Compile Include="Assets\Scripts\GameScene\Setup.cs" />
      <Compile Include="Assets\Scripts\GameScene\ThanksControl.cs" />
-     <Compile Include="Assets\Scripts\ItemUI.cs" />
      <Compile Include="Assets\Scripts\Object\CageControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockControl.cs" />
      <Compile Include="Assets\Scripts\Object\RockLeftsideControl.cs" />
