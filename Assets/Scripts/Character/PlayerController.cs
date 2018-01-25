@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
 	float axis_x;
 	float duration;
 	float anim_nomalized_time;
+    float walk_speed;
     float sound_span;
     
     Vector3 PUSH_POS;
@@ -104,7 +105,7 @@ public class PlayerController : MonoBehaviour {
 		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-            if (!jump)
+            if (walk_speed > 0.5 && !jump)
             {
                 sound_span -= Time.deltaTime; //タイマーのカウントダウン
                 if (sound_span <= 0)
@@ -118,7 +119,7 @@ public class PlayerController : MonoBehaviour {
 		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
-            if (!jump)
+            if (walk_speed > 0.5 && !jump)
             {
                 sound_span -= Time.deltaTime; //タイマーのカウントダウン
                 if (sound_span <= 0)
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void AnimatorUpdate( ) {
-		float walk_speed = rb2d.velocity.x;
+		walk_speed = rb2d.velocity.x;
 		if ( walk_speed < 0 ) {
 			walk_speed *= -1;
 		}
