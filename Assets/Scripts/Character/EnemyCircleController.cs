@@ -9,8 +9,9 @@ public class EnemyCircleController : MonoBehaviour {
 	AnimatorStateInfo animstate;
 	SpriteRenderer sr;
 	Color color;
+    GameObject Audio;
 
-	CircleUpsideControl upsidectrl;
+    CircleUpsideControl upsidectrl;
 	CircleFrontControl frontctrl;
 
 	Vector3 move_vec;
@@ -25,10 +26,12 @@ public class EnemyCircleController : MonoBehaviour {
 	float anim_nomalized_time;
 	float alpha;
 	float fade_time;
-	//float WaitTime = 0.5f;
+    float sound_span;
+    //float WaitTime = 0.5f;
 
-	void Awake( ) {
-		rb2d = GetComponent< Rigidbody2D >( );
+    void Awake( ) {
+        Audio = GameObject.Find("Audio");
+        rb2d = GetComponent< Rigidbody2D >( );
 		anim = GetComponent< Animator >( );
 		sr = GetComponent< SpriteRenderer >( );
 		upsidectrl = transform.Find("Upside").gameObject.GetComponent< CircleUpsideControl >( );
@@ -78,8 +81,14 @@ public class EnemyCircleController : MonoBehaviour {
 
 	private void dead( ) {
 		_isdead = true;
+        sound_span -= Time.deltaTime; //タイマーのカウントダウン
+        if (sound_span <= 0)　{
+            AudioControl se = Audio.GetComponent<AudioControl>();
+            se.Playse("敵にあてた");
+            sound_span = 3.0f;
+         }
 
-		if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.45f ) {
+        if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.45f ) {
 			fade_time -= Time.deltaTime;
 
 			if ( fade_time > 0 ) {
@@ -96,7 +105,6 @@ public class EnemyCircleController : MonoBehaviour {
 
 	void OnCollisionEnter2D( Collision2D other ) {
 		if ( other.gameObject.tag == "Block" && frontctrl._jump ||
-		     other.gameObject.tag == "Switch" && frontctrl._jump ||
 		     other.gameObject.tag == "Rock" && frontctrl._jump ) {
 			jump ();
 			//Invoke("jump", WaitTime);
