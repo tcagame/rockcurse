@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour {
 	bool fall_death;
 	bool operate_range;
 	bool generate;
-	bool rock;
+	bool _rock;
 	bool isdead;
 	bool inputcut;
 	float axis;
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour {
 		jump = true;
 		operate_range = false;
 		generate = false;
-		rock = true;
+		_rock = true;
 		isdead = false;
 		isdead = false;
 		axis = 0;
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour {
 			if ( transform.position.y < -20.0f ) {
 				gm.playerDead( );
 			}
-
+            SelectRock();
 			ActionUpdate( );
 			getFallSpeed( );
 			AnimatorUpdate( );
@@ -162,12 +162,23 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+    //岩の選択
+    public void SelectRock() {
+        if (Input.GetButtonDown("B") && !_rock) {
+            _rock = true;
+        }
+        if (Input.GetButtonDown("A") && _rock) {
+            _rock = false;
+        }
+    } 
+
 	// 岩生成
 	void generateRock( ) {
 		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
 
-		if (Input.GetButtonDown ("X") && !inputcut && !jump && rock) {
-			if (rock_num.Length < GENROCK_COUNT) {
+        if (Input.GetButtonDown ("X") && !inputcut && !jump && _rock) {
+            Debug.Log(_rock);
+            if (rock_num.Length < GENROCK_COUNT) {
 				generate = true;
 				inputcut = true;
 			}
@@ -186,7 +197,7 @@ public class PlayerController : MonoBehaviour {
 	void generateStone( ) {	
 		GameObject[ ] stone_num = GameObject.FindGameObjectsWithTag("Stone");
 
-		if ( Input.GetButtonDown("X") && !inputcut && !jump && !rock) {
+		if ( Input.GetButtonDown("X") && !inputcut && !jump && !_rock) {
 			if ( stone_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;

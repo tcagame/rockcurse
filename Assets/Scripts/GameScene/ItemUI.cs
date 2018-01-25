@@ -8,17 +8,14 @@ public class ItemUI : MonoBehaviour {
 
 	public Sprite[] _itemUI;
 	public GameObject Item_image;
+    float item_span;
+    float change_span;
+    int count;
 
-	private int i;
-	bool _item;
-	bool _Cube;
-	bool _Circle;
+    bool _item;
 
-
-
-	// Use this for initialization
-	void Start () {
-		i = 0;
+    // Use this for initialization
+    void Start () {
 		MainSpriteRenderer = Item_image.GetComponent<SpriteRenderer> ();
 		MainSpriteRenderer.sprite = _itemUI[2];
 		Item_image.SetActive (false);
@@ -26,28 +23,52 @@ public class ItemUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown ("B") && !_item ) {
-			Item_image.SetActive (true);
-			_item = true;
-			MainSpriteRenderer.sprite = _itemUI [2];
-			Invoke ("NotActiveItem", 3f);
+        SetItem();
+        item_span -= Time.deltaTime;
+        change_span -= Time.deltaTime;
+        if (item_span <= 0) {
+            NotActiveItem();
 		} 
-		SelectItem ();
+        if (change_span <= 0) {
+            SelectItem();
+        }
 	}
 
 	void NotActiveItem( ){
-		i = 0;
 		Item_image.SetActive (false);
 		_item = false;
+        count = 0;
 	}
 
+    void SetItem() {
+        if (Input.GetButtonDown("A") && !_item)
+        {
+            Item_image.SetActive(true);
+            _item = true;
+            MainSpriteRenderer.sprite = _itemUI[2];
+            item_span = 2.5f;
+            change_span = 0.1f;
+        }
+        if (Input.GetButtonDown("B") && !_item)
+        {
+            Item_image.SetActive(true);
+            _item = true;
+            MainSpriteRenderer.sprite = _itemUI[2];
+            item_span = 2.5f;
+            change_span = 0.1f;
+        }
+    }
+
 	void SelectItem( ){
-		if (Input.GetButtonDown ("X")) {
-			MainSpriteRenderer.sprite = _itemUI [0];
-		}
+
+        if (Input.GetButtonDown ("B")) {
+		    MainSpriteRenderer.sprite = _itemUI [0];
+            item_span = 2.5f;
+        }
 		if (Input.GetButtonDown ("A")) {
 			MainSpriteRenderer.sprite = _itemUI [1];
-		}
+            item_span = 2.5f;
+        }
 	}
 
 	//KeyCode"J""K"
