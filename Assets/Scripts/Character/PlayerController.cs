@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour {
 	Animator anim;
 	GameManager gm;
 	AnimatorStateInfo animstate;
+    GameObject Audio;
 
-	const float SPEED = 6.0f;
+    const float SPEED = 6.0f;
 	const float DEATH_FALLSPD = -10.0f;
 	const float MAX_VEL_X = 3.8f;
 	const int GENROCK_COUNT = 10;
@@ -28,8 +29,9 @@ public class PlayerController : MonoBehaviour {
 	float axis_x;
 	float duration;
 	float anim_nomalized_time;
-
-	Vector3 PUSH_POS;
+    float sound_span;
+    
+    Vector3 PUSH_POS;
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
@@ -46,7 +48,8 @@ public class PlayerController : MonoBehaviour {
 		isdead = false;
 		axis = 0;
 		axis_x = 0;
-	}
+        Audio = GameObject.Find("Audio");
+    }
 
 	void Update ( ) {
 		if( Time.timeScale > 0 ) {
@@ -79,27 +82,53 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ActionUpdate( ) {
-		// 移動
-		if ( axis_x > 0 && !inputcut ) {
+        // 移動
+        if ( axis_x > 0 && !inputcut ) {
 			axis = SPEED * axis_x;
 			rb2d.AddForce ( Vector3.right * axis );
 			transform.LookAt( transform.position + Vector3.back );
+            if (!jump) {
+                AudioControl se = Audio.GetComponent<AudioControl>();
+            }
 		}
 
 		if ( axis_x < 0 && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-		}
+            if (!jump)
+            {
+            }
+        }
 
 		// デバッグ用キーボード移動対応
 		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-		}
+            if (!jump)
+            {
+                sound_span -= Time.deltaTime; //タイマーのカウントダウン
+                if (sound_span <= 0)
+                {
+                    AudioControl se = Audio.GetComponent<AudioControl>();
+                    se.Playse("足音");
+                    sound_span = 0.5f;
+                }
+            }
+        }
 		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
-		}
+            if (!jump)
+            {
+                sound_span -= Time.deltaTime; //タイマーのカウントダウン
+                if (sound_span <= 0)
+                {
+                    AudioControl se = Audio.GetComponent<AudioControl>();
+                    se.Playse("足音");
+                    sound_span = 0.5f;
+                }
+            }
+        }
 
 		// ジャンプ
 		if ( Input.GetButtonDown("A") && !jump && !inputcut ) {
@@ -225,17 +254,6 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool( "isJump", jump );
 		anim.SetBool( "isGenerate", generate );
 		anim.SetBool( "isDead", isdead );
-	}
+    }
 
-	//ごめん　わからなかった
-	/*void Confirmation( ){
-		GameObject ui = GameObject.Find ("UI");
-		ItemUI _ui = GetComponent<ItemUI> ();
-		if (_ui._itemUI [0]) {
-			rock = true;
-		} else if (_ui._itemUI [1]) {
-			rock = false;
-		}
-			
-	}*/
 }

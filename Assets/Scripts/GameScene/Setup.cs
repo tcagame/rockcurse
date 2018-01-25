@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Setup : MonoBehaviour {
-    public BGM_Volume_Change bgm_volume_change;
 	Button Back_button;
 	// Use this for initialization
 	void Start () {
