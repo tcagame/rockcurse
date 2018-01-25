@@ -8,15 +8,19 @@ public class Gameover : MonoBehaviour {
 	
 	Button continue_game;
 	GameManager gm;
+    GameObject Audio;
 
 
-	// Use this for initialization
-	void Start ( ) {
-		new GameObject( ).AddComponent< SceneNavigator >( );
+    // Use this for initialization
+    void Start ( ) {
+        Audio = GameObject.Find("Audio");
+        new GameObject( ).AddComponent< SceneNavigator >( );
 		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
 		continue_game = GameObject.Find("retry").GetComponent< Button >( );
 
-		continue_game.Select( );
+        AudioControl se = Audio.GetComponent<AudioControl>();
+        se.Playse("gameover");
+        continue_game.Select( );
 	}
 	
 	// Update is called once per frame

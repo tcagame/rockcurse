@@ -88,16 +88,30 @@ public class PlayerController : MonoBehaviour {
 			axis = SPEED * axis_x;
 			rb2d.AddForce ( Vector3.right * axis );
 			transform.LookAt( transform.position + Vector3.back );
-            if (!jump) {
-                AudioControl se = Audio.GetComponent<AudioControl>();
+            if (walk_speed > 0.5 && !jump)
+            {
+                sound_span -= Time.deltaTime; //タイマーのカウントダウン
+                if (sound_span <= 0)
+                {
+                    AudioControl se = Audio.GetComponent<AudioControl>();
+                    se.Playse("足音");
+                    sound_span = 0.5f;
+                }
             }
-		}
+        }
 
 		if ( axis_x < 0 && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-            if (!jump)
+            if (walk_speed > 0.5 && !jump)
             {
+                sound_span -= Time.deltaTime; //タイマーのカウントダウン
+                if (sound_span <= 0)
+                {
+                    AudioControl se = Audio.GetComponent<AudioControl>();
+                    se.Playse("足音");
+                    sound_span = 0.5f;
+                }
             }
         }
 
