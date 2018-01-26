@@ -18,13 +18,19 @@ public class AudioControl : MonoBehaviour {
     }
 
     public AudioSource BGM,SE;
-    private string _nextSEName;
-    private Dictionary<string, AudioClip> _seDic;
+    private string _nextBGMName, _nextSEName;
+    private Dictionary<string, AudioClip> _bgmDic, _seDic;
 
     private void Awake() {
+        _bgmDic = new Dictionary<string, AudioClip>();
         _seDic = new Dictionary<string, AudioClip>();
+        object[] bgmList = Resources.LoadAll("Sound/music_true/BGM");
         object[] seList = Resources.LoadAll("Sound/music_true/SE");
 
+        foreach (AudioClip bgm in bgmList)
+        {
+            _bgmDic[bgm.name] = bgm;
+        }
         foreach (AudioClip se in seList)
         {
             _seDic[se.name] = se;
@@ -35,8 +41,22 @@ public class AudioControl : MonoBehaviour {
         BGM.Play();
     }
 
-    public void Playbgm() {
-        
+    public void GameoverBGM() {
+        BGM.Stop();
+    }
+
+    /// <summary>
+    /// 指定したファイル名のBGMを流す。第二引数のdelayに指定した時間だけ再生までの間隔を空ける
+    /// </summary>
+    public void Playbgm(string _bgmName, float delay = 0.0f)
+    {
+        _nextBGMName = _bgmName;
+        Invoke("DelayPlayBGM", delay);
+    }
+
+    private void DelayPlayBGM()
+    {
+        BGM.PlayOneShot(_bgmDic[_nextBGMName] as AudioClip);
     }
 
     /// <summary>

@@ -18,8 +18,9 @@ public class Gameover : MonoBehaviour {
 		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
 		continue_game = GameObject.Find("retry").GetComponent< Button >( );
 
-        AudioControl se = Audio.GetComponent<AudioControl>();
-        se.Playse("gameover");
+        AudioControl ad = Audio.GetComponent<AudioControl>();
+        ad.GameoverBGM();
+        ad.Playse("gameover");
         continue_game.Select( );
 	}
 	
@@ -29,7 +30,9 @@ public class Gameover : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ) {
-		SceneNavigator.Instance.Change( gm._current_scene, 1.5f );
+        AudioControl bgm = Audio.GetComponent<AudioControl>();
+        bgm.Playbgm("ゲームBGM");
+        SceneNavigator.Instance.Change( gm._current_scene, 1.5f );
 	}
 
 	public void OnStartButtonClicked2( ) {

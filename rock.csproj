@@ -100,8 +100,6 @@
     <Compile Include="Assets\Scripts\Object\RockUpsideControl.cs" />
     <Compile Include="Assets\Scripts\Object\SwitchControl.cs" />
     <Compile Include="Assets\Scripts\sound\AudioControl.cs" />
-    <Compile Include="Assets\Scripts\sound\BGM_Volume_Change.cs" />
-    <Compile Include="Assets\Scripts\sound\SE_Volume_Change.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
