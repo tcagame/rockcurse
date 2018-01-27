@@ -30,8 +30,6 @@ public class Gameover : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ) {
-        AudioControl bgm = Audio.GetComponent<AudioControl>();
-        bgm.Playbgm("ゲームBGM");
         SceneNavigator.Instance.Change( gm._current_scene, 1.5f );
 	}
 

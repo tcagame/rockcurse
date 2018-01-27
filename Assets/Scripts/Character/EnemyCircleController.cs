@@ -82,7 +82,7 @@ public class EnemyCircleController : MonoBehaviour {
 	private void dead( ) {
 		_isdead = true;
         sound_span -= Time.deltaTime; //タイマーのカウントダウン
-        if (sound_span <= 0)　{
+        if (sound_span <= 0) {
             AudioControl se = Audio.GetComponent<AudioControl>();
             se.Playse("敵にあてた");
             sound_span = 3.0f;

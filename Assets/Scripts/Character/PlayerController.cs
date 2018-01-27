@@ -46,7 +46,6 @@ public class PlayerController : MonoBehaviour {
 		generate = false;
 		_rock = true;
 		isdead = false;
-		isdead = false;
 		axis = 0;
 		axis_x = 0;
         Audio = GameObject.Find("Audio");
@@ -88,61 +87,25 @@ public class PlayerController : MonoBehaviour {
 			axis = SPEED * axis_x;
 			rb2d.AddForce ( Vector3.right * axis );
 			transform.LookAt( transform.position + Vector3.back );
-            if (walk_speed > 0.5 && !jump)
-            {
-                sound_span -= Time.deltaTime; //タイマーのカウントダウン
-                if (sound_span <= 0)
-                {
-                    AudioControl se = Audio.GetComponent<AudioControl>();
-                    se.Playse("足音");
-                    sound_span = 0.5f;
-                }
-            }
+			WalkAudio( );
         }
 
 		if ( axis_x < 0 && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-            if (walk_speed > 0.5 && !jump)
-            {
-                sound_span -= Time.deltaTime; //タイマーのカウントダウン
-                if (sound_span <= 0)
-                {
-                    AudioControl se = Audio.GetComponent<AudioControl>();
-                    se.Playse("足音");
-                    sound_span = 0.5f;
-                }
-            }
+			WalkAudio( );
         }
 
 		// デバッグ用キーボード移動対応
-		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut ) {
+		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
-            if (walk_speed > 0.5 && !jump)
-            {
-                sound_span -= Time.deltaTime; //タイマーのカウントダウン
-                if (sound_span <= 0)
-                {
-                    AudioControl se = Audio.GetComponent<AudioControl>();
-                    se.Playse("足音");
-                    sound_span = 0.5f;
-                }
-            }
+			WalkAudio( );
         }
-		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut ) {
+		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
-            if (walk_speed > 0.5 && !jump)
-            {
-                sound_span -= Time.deltaTime; //タイマーのカウントダウン
-                if (sound_span <= 0)
-                {
-                    AudioControl se = Audio.GetComponent<AudioControl>();
-                    se.Playse("足音");
-                    sound_span = 0.5f;
-                }
-            }
+			WalkAudio( );
         }
 
 		// ジャンプ
@@ -227,6 +190,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void dead( ) {
+		jump = false;
 		isdead = true;
 		inputcut = true;
 	}
@@ -286,5 +250,17 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool( "isGenerate", generate );
 		anim.SetBool( "isDead", isdead );
     }
+	public void WalkAudio(){
+		if (walk_speed > 0.5 && !jump)
+		{
+			sound_span -= Time.deltaTime; //タイマーのカウントダウン
+			if (sound_span <= 0)
+			{
+				AudioControl se = Audio.GetComponent<AudioControl>();
+				se.Playse("足音");
+				sound_span = 0.5f;
+			}
+		}
+	}
 
 }
