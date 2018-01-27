@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour {
     public GameObject parentObject;
     GameObject obj;
     GameObject prefab;
+	GameObject Audio;
 
 	const float CHANGESCENE_COUNT = 20.0f;
 	public bool LoadGames;
@@ -19,6 +20,7 @@ public class Menu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start( ) {
+		Audio = GameObject.Find( "Audio" );
 		new GameObject( ).AddComponent< SceneNavigator >( );
 		game_main = GameObject.Find ("start").GetComponent< Button > ( );
 
@@ -40,10 +42,14 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ){
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "map1", 2.5f );
 	}
 
 	public void OnStartButtonClicked2( ){
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse( "決定" );
 		if ( !LoadGames ) {
 			Debug.Log( "file not found" );
             obj = (GameObject)Resources.Load( "Prefab/NoData" );
@@ -57,10 +63,14 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked3( ){
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "set", 1.5f );
 	}
 
 	public void GameEnd( ){
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse( "決定" );
         Application.Quit( );
 	}
 }

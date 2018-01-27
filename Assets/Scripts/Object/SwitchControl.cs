@@ -29,7 +29,7 @@ public class SwitchControl : MonoBehaviour {
             transform.position = transform.position + new Vector3( 0, SPEED, 0 );
         } else {
             Destroy( gameObject );
-            se1.Playse("門が開く");
+            se1.Playse("open");
         }
 	}
 }

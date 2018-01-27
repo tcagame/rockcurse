@@ -33,7 +33,7 @@ public class ItemUI : MonoBehaviour {
             SelectItem();
         }
 	}
-
+	//非表示
 	void NotActiveItem( ){
 		Item_image.SetActive (false);
 		_item = false;
@@ -61,7 +61,7 @@ public class ItemUI : MonoBehaviour {
 
 	void SelectItem( ){
 
-        if (Input.GetButtonDown ("B")) {
+		if (Input.GetButtonDown ("B")) {
 		    MainSpriteRenderer.sprite = _itemUI [0];
             item_span = 2.5f;
         }

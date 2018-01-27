@@ -178,6 +178,8 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown ("X") && !inputcut && !jump && _rock) {
             Debug.Log(_rock);
+			AudioControl se1 = Audio.GetComponent<AudioControl>();
+			se1.Playse("生成");
             if (rock_num.Length < GENROCK_COUNT) {
 				generate = true;
 				inputcut = true;
@@ -198,6 +200,9 @@ public class PlayerController : MonoBehaviour {
 		GameObject[ ] stone_num = GameObject.FindGameObjectsWithTag("Stone");
 
 		if ( Input.GetButtonDown("X") && !inputcut && !jump && !_rock) {
+			Debug.Log(_rock);
+			AudioControl se1 = Audio.GetComponent<AudioControl>();
+			se1.Playse("生成");
 			if ( stone_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;
