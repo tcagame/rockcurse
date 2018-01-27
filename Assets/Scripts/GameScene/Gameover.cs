@@ -30,10 +30,14 @@ public class Gameover : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ) {
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse("決定");
         SceneNavigator.Instance.Change( gm._current_scene, 1.5f );
 	}
 
 	public void OnStartButtonClicked2( ) {
+		AudioControl se = Audio.GetComponent<AudioControl>();
+		se.Playse("決定");
 		SceneNavigator.Instance.Change( "thanks", 1.5f );
 	}
 }
