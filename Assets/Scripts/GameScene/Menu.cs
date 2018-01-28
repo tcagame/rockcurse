@@ -13,25 +13,18 @@ public class Menu : MonoBehaviour {
     GameObject obj;
     GameObject prefab;
 	GameObject Audio;
-	GameManager gm;
 
 	const float CHANGESCENE_COUNT = 20.0f;
 	public bool LoadGames;
 	float change_count;
-	string continue_scene;
 
 	void Awake( ) {
-		gm = GetComponent< GameManager >( );
 		Audio = GameObject.Find( "Audio" );
 		new GameObject( ).AddComponent< SceneNavigator >( );
 		game_main = GameObject.Find ("start").GetComponent< Button > ( );
 
 		game_main.Select( );
 		change_count = CHANGESCENE_COUNT;
-	}
-
-	void Start( ) {
-		continue_scene = gm._saved_scene;
 	}
 	
 	void Update( ) {
@@ -55,10 +48,7 @@ public class Menu : MonoBehaviour {
 	public void Continue( ){
 		AudioControl se = Audio.GetComponent<AudioControl>();
 		se.Playse( "決定" );
-		if ( continue_scene == null ) {
-			gm._saved_scene = "map1";
-		}
-		SceneNavigator.Instance.Change( gm._saved_scene, 1.5f );
+		//SceneNavigator.Instance.Change( continue_scene, 1.5f );
 	}
 
 	public void Setting( ){

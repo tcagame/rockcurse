@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
 		MAP4,
 		MAP5,
 		MAP6,
+		MAP7,
 		MAX_MAP
 	};
 
@@ -27,11 +28,12 @@ public class GameManager : MonoBehaviour {
 
 	GameObject gameover;
 
-	string CurrentSceneIndex;
 	public string _current_scene;
+	public static int countselect = 0;
+
+	string CurrentSceneIndex;
 	string _next_scene;
 	bool _gameover;
-	public static int countselect = 0;
 
 	private void Awake( ) {
 		new GameObject( ).AddComponent< SceneNavigator >( );
@@ -84,6 +86,9 @@ public class GameManager : MonoBehaviour {
 			_next_scene = "map6";
 			break;
 		case "map6":
+			_next_scene = "map7";
+			break;
+		case "map7":
 			_next_scene = "thanks";
 			break;
 		}
@@ -128,7 +133,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	public static int CountSelect() {
+	public static int CountSelect( ) {
 		return countselect;
 	}
 }

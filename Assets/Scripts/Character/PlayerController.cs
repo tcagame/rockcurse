@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour {
 	bool jump;
 	bool attach;
 	bool fall_death;
-	bool operate_range;
 	bool generate;
 	bool _rock;
 	bool isdead;
@@ -40,7 +39,6 @@ public class PlayerController : MonoBehaviour {
 
 	void Start ( ) {
 		jump = true;
-		operate_range = false;
 		generate = false;
 		_rock = true;
 		isdead = false;
@@ -110,10 +108,6 @@ public class PlayerController : MonoBehaviour {
 		if ( Input.GetButtonDown("A") && !jump && !inputcut ) {
 			rb2d.AddForce( Vector3.up * FLAP );
 			jump = true;
-		}
-
-		if ( Input.GetButtonDown("LB") ) {
-			gm.playerDead( );
 		}
 
 		SelectRock( );
@@ -192,20 +186,11 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
-	// 生成岩当たり判定
-	public void RelayOnTrigger( Collider2D other, int pos ) {
-		if ( pos == 1 ) { // 上
+	void OnTriggerEnter2D( Collider2D other ) {
+		if ( other.gameObject.name == "Upside" ) {
 			jump = false;
 		}
-		if ( pos == 2 ) { // 左
-			operate_range = true;
-		}
-		if ( pos == 3 ) { // 右
-			operate_range = true;
-		}
-	}
 
-	void OnTriggerEnter2D( Collider2D other ) {
 		if ( other.gameObject.tag == "Goal" ) {
 			gm.playerGoal( );
 		}

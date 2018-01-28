@@ -10,27 +10,25 @@ public class Pauser : MonoBehaviour {
 	GameObject Audio;
 
 	public bool _pause;
-	public bool _return_title;
 
-	// Use this for initialization
-	void Start ( ) {
-		_pause = false;
-		_return_title = false;
+	void Awake( ) {
 		Audio = GameObject.Find( "Audio" );
 		image = GameObject.Find("PauseImage").gameObject;
-		Title_button = GameObject.Find ("Button").GetComponent< Button > ( );
+		Title_button = GameObject.Find("Button").GetComponent< Button > ( );
+	}
+
+	void Start ( ) {
+		_pause = false;
 
 		image.gameObject.SetActive( _pause );
-
 		Title_button.Select( );
 	}
 
-	// Update is called once per frame
 	void Update ( ) {
 		Pausing( );
 	}
 
-	void Pausing( ) {
+	private void Pausing( ) {
 		if ( Input.GetButtonDown("Start") ) {
 			if ( _pause ){
 				_pause = false;
@@ -43,10 +41,10 @@ public class Pauser : MonoBehaviour {
 		}
 	}
 
-	public void SceneLoad( ){
-		AudioControl se = Audio.GetComponent<AudioControl>();
+	private void SceneLoad( ){
+		AudioControl se = Audio.GetComponent< AudioControl >( );
 		se.Playse( "決定" );
-		SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
-		_return_title = true;
+		Time.timeScale = 1;
+		SceneNavigator.Instance.Change( "Title", 1.5f );
 	}
 }

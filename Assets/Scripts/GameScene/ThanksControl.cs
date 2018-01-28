@@ -29,7 +29,7 @@ public class ThanksControl : MonoBehaviour {
 			Input.GetButtonDown("X") ||
 			Input.GetButtonDown("Y") ||
 			exit_time < 0 ) {
-			SceneNavigator.Instance.Change( "tgsVerTitle", 2.5f );
+			SceneNavigator.Instance.Change( "Title", 2.5f );
 		}
 	}
 }
