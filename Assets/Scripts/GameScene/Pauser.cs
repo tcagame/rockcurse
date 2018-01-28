@@ -16,9 +16,9 @@ public class Pauser : MonoBehaviour {
 		_pause = false;
 		Audio = GameObject.Find( "Audio" );
 		image = GameObject.Find("PauseImage").gameObject;
-		image.gameObject.SetActive( _pause );
-
 		Title_button = GameObject.Find ("Button").GetComponent< Button > ( );
+
+		image.gameObject.SetActive( _pause );
 
 		Title_button.Select( );
 	}
