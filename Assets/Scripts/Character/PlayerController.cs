@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour {
 	const float MAX_VEL_X = 3.8f;
 	const int GENROCK_COUNT = 10;
 	const float FLAP = 250.0f;
+	const float GEN_WAITTIME = 2.0f;
 
 	bool jump;
 	bool attach;
 	bool fall_death;
 	bool generate;
+	bool gen_wait;
 	bool _rock;
 	bool isdead;
 	bool inputcut;
@@ -30,21 +32,24 @@ public class PlayerController : MonoBehaviour {
 	float anim_nomalized_time;
     float walk_speed;
     float sound_span;
+	float gen_time;
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
 		anim = GetComponent< Animator >( );
 		gm = GameObject.FindGameObjectWithTag("GameController").GetComponent< GameManager >( );
+		Audio = GameObject.Find("Audio");
 	}
 
 	void Start ( ) {
 		jump = true;
 		generate = false;
+		gen_wait = false;
 		_rock = true;
 		isdead = false;
 		axis = 0;
 		axis_x = 0;
-        Audio = GameObject.Find("Audio");
+		gen_time = 0;
     }
 
 	void Update ( ) {
@@ -56,6 +61,14 @@ public class PlayerController : MonoBehaviour {
 
 			if ( transform.position.y < -20.0f ) {
 				gm.playerDead( );
+			}
+
+			if ( gen_wait ) {
+				gen_time += Time.deltaTime;
+				if ( gen_time > GEN_WAITTIME ) {
+					gen_wait = false;
+					gen_time = 0;
+				}
 			}
 
 			ActionUpdate( );
@@ -129,10 +142,11 @@ public class PlayerController : MonoBehaviour {
 		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
 		AudioControl se1 = Audio.GetComponent< AudioControl >( );
 
-		if ( Input.GetButtonDown ("X") && !inputcut && !jump && _rock ) {
-			 if ( rock_num.Length < GENROCK_COUNT ) {
+		if ( Input.GetButtonDown ("X") && !inputcut && !jump && _rock && !gen_wait ) {
+			if ( rock_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;
+				gen_wait = true;
 			}
 		}
 
