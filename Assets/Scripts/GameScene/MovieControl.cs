@@ -30,7 +30,7 @@ public class MovieControl : MonoBehaviour {
 	
 	void Update ( ) {
 		if ( !movtex.isPlaying ) {
-			SceneNavigator.Instance.Change( "tgsVerTitle", 1.0f );
+			SceneNavigator.Instance.Change( "Title", 1.0f );
 			ischanging = true;
 		}
 
@@ -38,7 +38,7 @@ public class MovieControl : MonoBehaviour {
 			Input.GetButtonDown("B") || 
 			Input.GetButtonDown("X") || 
 			Input.GetButtonDown("Y") ) {
-			SceneNavigator.Instance.Change( "tgsVerTitle", 2.0f );
+			SceneNavigator.Instance.Change( "Title", 2.0f );
 			ischanging = true;
 		}
 
