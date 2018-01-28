@@ -31,8 +31,6 @@ public class PlayerController : MonoBehaviour {
 	float anim_nomalized_time;
     float walk_speed;
     float sound_span;
-    
-    Vector3 PUSH_POS;
 
 	void Awake( ) {
 		rb2d = GetComponent< Rigidbody2D >( );
@@ -61,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 			if ( transform.position.y < -20.0f ) {
 				gm.playerDead( );
 			}
-            SelectRock();
+
 			ActionUpdate( );
 			getFallSpeed( );
 			AnimatorUpdate( );
@@ -97,12 +95,12 @@ public class PlayerController : MonoBehaviour {
         }
 
 		// デバッグ用キーボード移動対応
-		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut) {
+		if ( Input.GetKey( KeyCode.LeftArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.left * SPEED );
 			transform.LookAt( transform.position + Vector3.forward );
 			WalkAudio( );
         }
-		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut) {
+		if ( Input.GetKey( KeyCode.RightArrow ) && !inputcut ) {
 			rb2d.AddForce ( Vector3.right * SPEED );
 			transform.LookAt( transform.position + Vector3.back );
 			WalkAudio( );
@@ -114,23 +112,20 @@ public class PlayerController : MonoBehaviour {
 			jump = true;
 		}
 
-		generateRock( );
-		movingRock( );
-	}
-
-	// 岩押し引き
-	void movingRock( ) {
-		if ( Input.GetButtonDown("B") && operate_range ) {
-			
+		if ( Input.GetButtonDown("LB") ) {
+			gm.playerDead( );
 		}
+
+		SelectRock( );
+		generateRock( );
 	}
 
     //岩の選択
     public void SelectRock() {
-        if (Input.GetButtonDown("B") && !_rock) {
+        if (Input.GetButtonDown("LB") && !_rock) {
             _rock = true;
         }
-        if (Input.GetButtonDown("A") && _rock) {
+        if (Input.GetButtonDown("RB") && _rock) {
             _rock = false;
         }
     } 
@@ -138,12 +133,10 @@ public class PlayerController : MonoBehaviour {
 	// 岩生成
 	void generateRock( ) {
 		GameObject[ ] rock_num = GameObject.FindGameObjectsWithTag ("Rock");
+		AudioControl se1 = Audio.GetComponent< AudioControl >( );
 
-        if (Input.GetButtonDown ("X") && !inputcut && !jump && _rock) {
-            Debug.Log(_rock);
-			AudioControl se1 = Audio.GetComponent<AudioControl>();
-			se1.Playse("生成");
-            if (rock_num.Length < GENROCK_COUNT) {
+		if ( Input.GetButtonDown ("X") && !inputcut && !jump && _rock ) {
+			 if ( rock_num.Length < GENROCK_COUNT ) {
 				generate = true;
 				inputcut = true;
 			}
@@ -151,31 +144,10 @@ public class PlayerController : MonoBehaviour {
 
 		// 生成アニメーション待ちして生成
 		if (generate && duration >= 1.0f && anim_nomalized_time >= 0.5f) {
+			se1.Playse( "Generate" );
 			GameObject rock = (GameObject)Resources.Load ("Prefab/Rock");
 			Instantiate (rock, transform.position + transform.right * -2.0f, Quaternion.identity);
-			generate = false;
-			inputcut = false;
-		}
-	}
 
-	//仮でやってみたけど色々わからなくて挫折
-	void generateStone( ) {	
-		GameObject[ ] stone_num = GameObject.FindGameObjectsWithTag("Stone");
-
-		if ( Input.GetButtonDown("X") && !inputcut && !jump && !_rock) {
-			Debug.Log(_rock);
-			AudioControl se1 = Audio.GetComponent<AudioControl>();
-			se1.Playse("生成");
-			if ( stone_num.Length < GENROCK_COUNT ) {
-				generate = true;
-				inputcut = true;
-			}
-		}
-
-		// 生成アニメーション待ちして生成
-		if ( generate && duration >= 1.0f && anim_nomalized_time >= 0.5f ) {
-			GameObject stone = (GameObject)Resources.Load ("Prefab/Stone");
-			Instantiate( stone, transform.position + transform.right * -2.0f, Quaternion.identity );
 			generate = false;
 			inputcut = false;
 		}
@@ -250,14 +222,13 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool( "isGenerate", generate );
 		anim.SetBool( "isDead", isdead );
     }
-	public void WalkAudio(){
-		if (walk_speed > 0.5 && !jump)
-		{
+
+	public void WalkAudio( ) {
+		if ( walk_speed > 0.5 && !jump ) {
 			sound_span -= Time.deltaTime; //タイマーのカウントダウン
-			if (sound_span <= 0)
-			{
-				AudioControl se = Audio.GetComponent<AudioControl>();
-				se.Playse("足音");
+			if ( sound_span <= 0 ) {
+				AudioControl se = Audio.GetComponent< AudioControl >( );
+				se.Playse( "足音" );
 				sound_span = 0.5f;
 			}
 		}

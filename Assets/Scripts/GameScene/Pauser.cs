@@ -10,10 +10,12 @@ public class Pauser : MonoBehaviour {
 	GameObject Audio;
 
 	public bool _pause;
+	public bool _return_title;
 
 	// Use this for initialization
 	void Start ( ) {
 		_pause = false;
+		_return_title = false;
 		Audio = GameObject.Find( "Audio" );
 		image = GameObject.Find("PauseImage").gameObject;
 		Title_button = GameObject.Find ("Button").GetComponent< Button > ( );
@@ -45,5 +47,6 @@ public class Pauser : MonoBehaviour {
 		AudioControl se = Audio.GetComponent<AudioControl>();
 		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "TGSverTitle", 1.5f );
+		_return_title = true;
 	}
 }

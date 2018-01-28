@@ -13,13 +13,15 @@ public class Menu : MonoBehaviour {
     GameObject obj;
     GameObject prefab;
 	GameObject Audio;
+	GameManager gm;
 
 	const float CHANGESCENE_COUNT = 20.0f;
 	public bool LoadGames;
 	float change_count;
+	string continue_scene;
 
-	// Use this for initialization
-	void Start( ) {
+	void Awake( ) {
+		gm = GetComponent< GameManager >( );
 		Audio = GameObject.Find( "Audio" );
 		new GameObject( ).AddComponent< SceneNavigator >( );
 		game_main = GameObject.Find ("start").GetComponent< Button > ( );
@@ -27,10 +29,13 @@ public class Menu : MonoBehaviour {
 		game_main.Select( );
 		change_count = CHANGESCENE_COUNT;
 	}
+
+	void Start( ) {
+		continue_scene = gm._saved_scene;
+	}
 	
-	// Update is called once per frame
 	void Update( ) {
-		loadMovieCountdown ();
+		loadMovieCountdown( );
 	}
 
 	private void loadMovieCountdown( ) {
@@ -41,28 +46,22 @@ public class Menu : MonoBehaviour {
 		}
 	}
 
-	public void OnStartButtonClicked1( ){
+	public void StartGame( ){
 		AudioControl se = Audio.GetComponent<AudioControl>();
 		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "map1", 2.5f );
 	}
 
-	public void OnStartButtonClicked2( ){
+	public void Continue( ){
 		AudioControl se = Audio.GetComponent<AudioControl>();
 		se.Playse( "決定" );
-		if ( !LoadGames ) {
-			Debug.Log( "file not found" );
-            obj = (GameObject)Resources.Load( "Prefab/NoData" );
-            prefab = (GameObject)Instantiate( obj );
-            prefab.transform.SetParent( parentObject.transform, false );
-            Destroy( prefab, 2.0f );
-			//FadeManager.Instance.LoadScene( "main", 3.0f );
-		} else {
-			SceneNavigator.Instance.Change( "SelectMap", 1.5f );
+		if ( continue_scene == null ) {
+			gm._saved_scene = "map1";
 		}
+		SceneNavigator.Instance.Change( gm._saved_scene, 1.5f );
 	}
 
-	public void OnStartButtonClicked3( ){
+	public void Setting( ){
 		AudioControl se = Audio.GetComponent<AudioControl>();
 		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "set", 1.5f );

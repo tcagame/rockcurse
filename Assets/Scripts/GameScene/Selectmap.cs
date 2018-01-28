@@ -24,8 +24,8 @@ public class Selectmap : MonoBehaviour {
 	}
 
 	public void OnStartButtonClicked1( ){
-		Debug.Log(select_map);
-		if (select_map == 0) {
+		Debug.Log( select_map );
+		if ( select_map == 0 ) {
 			SceneNavigator.Instance.Change ("map1", 2.5f);
 		}
 	}

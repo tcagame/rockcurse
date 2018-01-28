@@ -7,13 +7,11 @@ public class AudioControl : MonoBehaviour {
     [SerializeField]
     UnityEngine.Audio.AudioMixer mixer;
 
-    public float masterVolumeBGM
-    {
+    public float masterVolumeBGM {
         set { mixer.SetFloat("BGM", Mathf.Lerp(-80, 0, value)); }
     }
 
-    public float masterVolumeSE
-    {
+    public float masterVolumeSE {
         set { mixer.SetFloat("SE", Mathf.Lerp(-80, 0, value)); }
     }
 
@@ -27,12 +25,10 @@ public class AudioControl : MonoBehaviour {
         object[] bgmList = Resources.LoadAll("Sound/music_true/BGM");
         object[] seList = Resources.LoadAll("Sound/music_true/SE");
 
-        foreach (AudioClip bgm in bgmList)
-        {
+        foreach (AudioClip bgm in bgmList) {
             _bgmDic[bgm.name] = bgm;
         }
-        foreach (AudioClip se in seList)
-        {
+        foreach (AudioClip se in seList) {
             _seDic[se.name] = se;
         }
     }

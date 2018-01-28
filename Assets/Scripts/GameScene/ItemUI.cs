@@ -41,7 +41,7 @@ public class ItemUI : MonoBehaviour {
 	}
 
     void SetItem() {
-        if (Input.GetButtonDown("A") && !_item)
+        if (Input.GetButtonDown("LB") && !_item)
         {
             Item_image.SetActive(true);
             _item = true;
@@ -49,7 +49,7 @@ public class ItemUI : MonoBehaviour {
             item_span = 2.5f;
             change_span = 0.1f;
         }
-        if (Input.GetButtonDown("B") && !_item)
+        if (Input.GetButtonDown("RB") && !_item)
         {
             Item_image.SetActive(true);
             _item = true;
@@ -61,11 +61,11 @@ public class ItemUI : MonoBehaviour {
 
 	void SelectItem( ){
 
-		if (Input.GetButtonDown ("B")) {
+		if (Input.GetButtonDown ("LB")) {
 		    MainSpriteRenderer.sprite = _itemUI [0];
             item_span = 2.5f;
         }
-		if (Input.GetButtonDown ("A")) {
+		if (Input.GetButtonDown ("RB")) {
 			MainSpriteRenderer.sprite = _itemUI [1];
             item_span = 2.5f;
         }
