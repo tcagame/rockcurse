@@ -28,8 +28,8 @@ public class SwitchControl : MonoBehaviour {
         if ( transform.position.y > -7.85f ) {
             transform.position = transform.position + new Vector3( 0, SPEED, 0 );
         } else {
-            Destroy( gameObject );
             se1.Playse("open");
+            Destroy( gameObject );
         }
 	}
 }
