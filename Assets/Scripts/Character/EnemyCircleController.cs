@@ -19,6 +19,7 @@ public class EnemyCircleController : MonoBehaviour {
 
 	const float SPEED = 0.01f;
 	const float FADE_TIME = 1.0f;
+	float CHARGEUP = 0.7f;
 
 	public bool _isdead;
 
@@ -27,7 +28,7 @@ public class EnemyCircleController : MonoBehaviour {
 	float alpha;
 	float fade_time;
     float sound_span;
-    //float WaitTime = 0.5f;
+	bool isjump;
 
     void Awake( ) {
         Audio = GameObject.Find("Audio");
@@ -41,6 +42,7 @@ public class EnemyCircleController : MonoBehaviour {
 	void Start ( ) {
 		move_vec = Vector3.left;
 		_isdead = false;
+		isjump = false;
 		alpha = 0;
 		fade_time = FADE_TIME;
 	}
@@ -73,20 +75,32 @@ public class EnemyCircleController : MonoBehaviour {
 			transform.position += move_vec * SPEED;
 			transform.LookAt( transform.position + look_vec );
 		}
+
+		if ( frontctrl._jump ) {
+			Invoke( "jump", CHARGEUP );
+		}
 	}
 
-	private void jump( ) {
-		rb2d.AddForce( new Vector3( 1000.0f, 1500.0f, 0 ) );
+	void jump( ) {
+		if ( !isjump ) {
+			rb2d.AddForce( new Vector3( 0, 1500.0f, 0 ) );
+			isjump = true;
+		}
 	}
 
 	private void dead( ) {
 		_isdead = true;
-        sound_span -= Time.deltaTime; //タイマーのカウントダウン
+		sound_span -= Time.deltaTime; //タイマーのカウントダウン
         if (sound_span <= 0) {
             AudioControl se = Audio.GetComponent<AudioControl>();
             se.Playse("敵にあてた");
             sound_span = 3.0f;
          }
+
+		if ( _isdead && duration >= 2.0f ) {
+			rb2d.bodyType = RigidbodyType2D.Kinematic;
+			GetComponent< PolygonCollider2D >( ).enabled = false;
+		}
 
         if ( _isdead && duration >= 2.5f && anim_nomalized_time >= 0.45f ) {
 			fade_time -= Time.deltaTime;
@@ -104,11 +118,10 @@ public class EnemyCircleController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter2D( Collision2D other ) {
-		if ( other.gameObject.tag == "Block" && frontctrl._jump ||
-		     other.gameObject.tag == "Rock" && frontctrl._jump ) {
-			jump ();
-			//Invoke("jump", WaitTime);
-			//動きとめないと吹っ飛ぶ,,,
+		if ( other.gameObject.tag == "Block" ||
+			other.gameObject.tag == "Rock" ||
+			other.gameObject.tag == "Floor") {
+			isjump = false;
 		}
 
 		if ( other.gameObject.tag == "Block" ) {

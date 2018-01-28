@@ -16,7 +16,7 @@ public class CircleUpsideControl : MonoBehaviour {
 		
 	}
 
-	void OnCollisionEnter2D( Collision2D other ) {
+	void OnTriggerEnter2D( Collider2D other ) {
 		if ( other.gameObject.tag == "Rock" ) {
 			_dead = true;
 		}
