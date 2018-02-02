@@ -62,12 +62,13 @@ public class GameManager : MonoBehaviour {
 	}
 
 	private void checkSceneIndex( ) {
-		CurrentSceneIndex = SceneManager.GetActiveScene( ).name; //現在のシーン名を取得
+		CurrentSceneIndex = SceneManager.GetActiveScene( ).name; // 現在のシーン名取得
 		_current_scene = CurrentSceneIndex;
 
 		setNextSceneIndex( );
 	}
 
+	// マップを追加したら順に並べる
 	private string setNextSceneIndex( ) {
 		switch( CurrentSceneIndex ) {
 		case "map1":

@@ -21,7 +21,7 @@ public class Menu : MonoBehaviour {
 	void Awake( ) {
 		Audio = GameObject.Find( "Audio" );
 		new GameObject( ).AddComponent< SceneNavigator >( );
-		game_main = GameObject.Find ("start").GetComponent< Button > ( );
+		game_main = GameObject.Find( "Start" ).GetComponent< Button > ( );
 
 		game_main.Select( );
 		change_count = CHANGESCENE_COUNT;
@@ -40,25 +40,13 @@ public class Menu : MonoBehaviour {
 	}
 
 	public void StartGame( ){
-		AudioControl se = Audio.GetComponent<AudioControl>();
+		AudioControl se = Audio.GetComponent< AudioControl >( );
 		se.Playse( "決定" );
 		SceneNavigator.Instance.Change( "map1", 2.5f );
 	}
 
-	public void Continue( ){
-		AudioControl se = Audio.GetComponent<AudioControl>();
-		se.Playse( "決定" );
-		//SceneNavigator.Instance.Change( continue_scene, 1.5f );
-	}
-
-	public void Setting( ){
-		AudioControl se = Audio.GetComponent<AudioControl>();
-		se.Playse( "決定" );
-		SceneNavigator.Instance.Change( "set", 1.5f );
-	}
-
 	public void GameEnd( ){
-		AudioControl se = Audio.GetComponent<AudioControl>();
+		AudioControl se = Audio.GetComponent< AudioControl >( );
 		se.Playse( "決定" );
         Application.Quit( );
 	}
