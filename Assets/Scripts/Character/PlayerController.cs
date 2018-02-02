@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 	bool _rock;
 	bool isdead;
 	bool inputcut;
+	bool under_hitting;
 	float axis;
 	float axis_x;
 	float duration;
@@ -75,7 +76,6 @@ public class PlayerController : MonoBehaviour {
 			getFallSpeed( );
 			AnimatorUpdate( );
 			waitDeadAnimation( );
-			//Confirmation ();
 		}
 	}
 
@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour {
         }
 
 		// ジャンプ
-		if ( Input.GetButtonDown("A") && !jump && !inputcut ) {
+		if ( Input.GetButtonDown("A") && !jump && !inputcut && under_hitting ) {
 			rb2d.AddForce( Vector3.up * FLAP );
 			jump = true;
 		}
@@ -128,11 +128,11 @@ public class PlayerController : MonoBehaviour {
 	}
 
     //岩の選択
-    public void SelectRock() {
-        if (Input.GetButtonDown("LB") && !_rock) {
+    public void SelectRock( ) {
+        if ( Input.GetButtonDown("LB") && !_rock ) {
             _rock = true;
         }
-        if (Input.GetButtonDown("RB") && _rock) {
+        if ( Input.GetButtonDown("RB") && _rock ) {
             _rock = false;
         }
     } 
@@ -182,11 +182,19 @@ public class PlayerController : MonoBehaviour {
 		}
 	}
 
+	public void relayOnTriggerStay2D( ) {
+		under_hitting = true;
+	}
+
+	public void relayOnTriggerExit2D( ) {
+		under_hitting = false;
+	}
+
 	void OnCollisionEnter2D( Collision2D other ) {
 		if ( other.gameObject.tag == "Floor" || 
 			other.gameObject.name == "Upside" ||
 			other.gameObject.tag == "Switch" ||
-			other.gameObject.tag == "Block" ) {
+			other.gameObject.tag == "Block" && under_hitting ) {
 
 			if ( fall_death ) {
 				dead( );
